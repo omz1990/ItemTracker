@@ -1,0 +1,6 @@
+framework module Pods_ItemTracker {
+  umbrella header "Pods-ItemTracker-umbrella.h"
+
+  export *
+  module * { export * }
+}
