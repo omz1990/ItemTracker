@@ -13,7 +13,7 @@ extension UIViewController {
     
     func presentViewController(storyboardId: String) {
         let storyboard = UIStoryboard(name: Constants.Storyboard.Main, bundle: nil)
-        let secondVC = storyboard.instantiateViewController(identifier: storyboardId)
+        let secondVC = storyboard.instantiateViewController(withIdentifier: storyboardId)
         
         secondVC.modalPresentationStyle = .fullScreen
         secondVC.modalTransitionStyle = .crossDissolve

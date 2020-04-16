@@ -17,11 +17,27 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    private var googleSignInGestureRecognizer: UITapGestureRecognizer!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        initGoogleSignInListener()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    private func initGoogleSignInListener() {
+        googleSignInGestureRecognizer = UITapGestureRecognizer(target: self, action:  #selector(self.googleSignInTapped))
+        googleSignInView.addGestureRecognizer(googleSignInGestureRecognizer)
+    }
 
+    @objc func googleSignInTapped(sender : UITapGestureRecognizer) {
+        print("Google Sign in tapped")
+        googleSignInView.removeGestureRecognizer(googleSignInGestureRecognizer)
+    }
+    
     @IBAction func signInTapped(_ sender: Any) {
         presentViewController(storyboardId: Constants.StoryboardId.MainTabsController)
     }
