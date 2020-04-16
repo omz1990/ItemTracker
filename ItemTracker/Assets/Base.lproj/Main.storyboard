@@ -132,6 +132,9 @@ Sign in to start tracking your stuff!</string>
                                                         <real key="value" value="14"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="signInTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8wb-BI-H9t"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sg5-zE-utZ">
                                                 <rect key="frame" x="193.5" y="572" width="27" height="33.5"/>
@@ -229,10 +232,69 @@ Sign in to start tracking your stuff!</string>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Sign in" id="6Oh-yY-xA6"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="kHQ-U7-132" id="HaG-Wa-BAd"/>
+                        <outlet property="emailTextField" destination="R54-tR-zol" id="T1u-5t-DXP"/>
+                        <outlet property="googleSignInView" destination="pC7-0y-6KT" id="SKX-gC-l37"/>
+                        <outlet property="passwordTextField" destination="2Sb-M0-8Db" id="0lw-Gq-8hP"/>
+                        <outlet property="signInButton" destination="PRE-fb-ZrD" id="9V7-cF-Xqw"/>
+                        <outlet property="signUpButton" destination="NCD-sB-4fA" id="zhv-ia-tlp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="93" y="139"/>
+        </scene>
+        <!--Locations-->
+        <scene sceneID="Npm-XI-FM0">
+            <objects>
+                <navigationController id="ygm-tR-OAi" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Locations" image="locationsTab" id="fSN-l5-UY2">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="7"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="r26-l8-Xsn">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FhT-ee-zQg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="93" y="842"/>
+        </scene>
+        <!--Items-->
+        <scene sceneID="p10-26-aow">
+            <objects>
+                <navigationController id="bI9-N5-2vk" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Items" image="itemsTab" id="DRk-Bq-l6E">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="7"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uJc-Sz-eYz">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yYM-v2-HcK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="93" y="1546"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="ljf-XH-1jh">
+            <objects>
+                <tabBarController storyboardIdentifier="MainTabBarController" id="e4A-CD-ZN0" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Zho-3W-2wh"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Yec-uc-Sgm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ygm-tR-OAi" kind="relationship" relationship="viewControllers" id="WPE-9J-mN6"/>
+                        <segue destination="bI9-N5-2vk" kind="relationship" relationship="viewControllers" id="Hob-BV-4I8"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bFx-eL-hAb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-762" y="1136"/>
         </scene>
         <!--Sign up-->
         <scene sceneID="tRw-iL-79p">
@@ -422,12 +484,12 @@ Sign in to start tracking your stuff!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yl0-MT-VgC" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="93" y="875"/>
+            <point key="canvasLocation" x="965" y="139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hPy-r7-XXJ">
             <objects>
-                <navigationController id="9r1-iA-nlp" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="LoginNavigationController" id="9r1-iA-nlp" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Unr-TM-f5Q">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -444,5 +506,7 @@ Sign in to start tracking your stuff!</string>
     <resources>
         <image name="desk" width="128" height="128"/>
         <image name="google" width="128" height="128"/>
+        <image name="itemsTab" width="37.5" height="37.5"/>
+        <image name="locationsTab" width="21" height="37.5"/>
     </resources>
 </document>

@@ -10,10 +10,19 @@ import UIKit
 
 class SignInViewController: UIViewController {
 
+    @IBOutlet weak var googleSignInView: RoundedView!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
+    @IBAction func signInTapped(_ sender: Any) {
+        presentViewController(storyboardId: Constants.StoryboardId.MainTabsController)
+    }
 }
