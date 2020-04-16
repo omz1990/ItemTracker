@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import GoogleSignIn
 
 class SignInViewController: UIViewController {
 
@@ -26,6 +28,13 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().presentingViewController = self
+            
+        if (GIDSignIn.sharedInstance().hasPreviousSignIn()) {
+          GIDSignIn.sharedInstance().restorePreviousSignIn()
+        }
     }
     
     private func initGoogleSignInListener() {
@@ -35,10 +44,35 @@ class SignInViewController: UIViewController {
 
     @objc func googleSignInTapped(sender : UITapGestureRecognizer) {
         print("Google Sign in tapped")
+        GIDSignIn.sharedInstance().signIn()
         googleSignInView.removeGestureRecognizer(googleSignInGestureRecognizer)
     }
     
     @IBAction func signInTapped(_ sender: Any) {
         presentViewController(storyboardId: Constants.StoryboardId.MainTabsController)
+    }
+}
+
+extension SignInViewController: GIDSignInDelegate {
+
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+        if let error = error {
+            print(error)
+            return
+        }
+
+        guard let email = user.profile.email else { return }
+
+        guard let authentication = user.authentication else { return }
+
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+
+        Auth.auth().signIn(with: credential) { (authResult, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            self.presentViewController(storyboardId: Constants.StoryboardId.MainTabsController)
+        }
     }
 }
