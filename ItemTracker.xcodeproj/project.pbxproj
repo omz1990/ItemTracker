@@ -14,6 +14,8 @@
 		563191DE243C6C4C003E47C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 563191DD243C6C4C003E47C5 /* Assets.xcassets */; };
 		563191E1243C6C4C003E47C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 563191DF243C6C4C003E47C5 /* LaunchScreen.storyboard */; };
 		56765C16243D6E220047CAE9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56765C15243D6E220047CAE9 /* GoogleService-Info.plist */; };
+		56BBF98D244782630070D250 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBF98C244782630070D250 /* RoundedView.swift */; };
+		56BBF98F2448804A0070D250 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBF98E2448804A0070D250 /* UIButton+Extension.swift */; };
 		5E46AF78BDDF7A993C3C5C8A /* Pods_ItemTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE781340196B2D26991AB587 /* Pods_ItemTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +29,8 @@
 		563191E0243C6C4C003E47C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		563191E2243C6C4C003E47C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56765C15243D6E220047CAE9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		56BBF98C244782630070D250 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
+		56BBF98E2448804A0070D250 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		76259A1D8D3D5C3637E944D9 /* Pods-ItemTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ItemTracker.release.xcconfig"; path = "Target Support Files/Pods-ItemTracker/Pods-ItemTracker.release.xcconfig"; sourceTree = "<group>"; };
 		9A287D4CF7DB30AC2EBCC806 /* Pods-ItemTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ItemTracker.debug.xcconfig"; path = "Target Support Files/Pods-ItemTracker/Pods-ItemTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		AE781340196B2D26991AB587 /* Pods_ItemTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ItemTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +102,8 @@
 		5687A24B24476AEF0025F1EB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				56BBF98C244782630070D250 /* RoundedView.swift */,
+				56BBF98E2448804A0070D250 /* UIButton+Extension.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -288,8 +294,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56BBF98D244782630070D250 /* RoundedView.swift in Sources */,
 				563191D9243C6C4A003E47C5 /* ViewController.swift in Sources */,
 				563191D5243C6C4A003E47C5 /* AppDelegate.swift in Sources */,
+				56BBF98F2448804A0070D250 /* UIButton+Extension.swift in Sources */,
 				563191D7243C6C4A003E47C5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
