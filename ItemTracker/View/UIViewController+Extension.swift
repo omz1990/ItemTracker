@@ -6,8 +6,8 @@
 //  Copyright © 2020 AmmoLogic Training. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import Firebase
 
 extension UIViewController {
     
@@ -19,5 +19,16 @@ extension UIViewController {
         secondVC.modalTransitionStyle = .crossDissolve
         
         present(secondVC, animated: true, completion: nil)
+    }
+    
+    func logout() {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+            dismiss(animated: true, completion: nil)
+        } catch let signOutError as NSError {
+            print ("Error signing out: \(signOutError.localizedDescription)")
+        }
+        presentViewController(storyboardId: Constants.StoryboardId.LoginController)
     }
 }

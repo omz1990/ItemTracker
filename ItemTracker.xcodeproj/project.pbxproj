@@ -19,6 +19,8 @@
 		56BBF9932448876A0070D250 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBF9922448876A0070D250 /* SignUpViewController.swift */; };
 		56BBF99524489EFA0070D250 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBF99424489EFA0070D250 /* Constants.swift */; };
 		56BBF9972448B4630070D250 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBF9962448B4630070D250 /* UIViewController+Extension.swift */; };
+		56BBF9992448CE4F0070D250 /* LocationsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBF9982448CE4F0070D250 /* LocationsTabViewController.swift */; };
+		56BBF99B2448CE620070D250 /* ItemsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBF99A2448CE620070D250 /* ItemsTabViewController.swift */; };
 		5E46AF78BDDF7A993C3C5C8A /* Pods_ItemTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE781340196B2D26991AB587 /* Pods_ItemTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +39,8 @@
 		56BBF9922448876A0070D250 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		56BBF99424489EFA0070D250 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		56BBF9962448B4630070D250 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		56BBF9982448CE4F0070D250 /* LocationsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsTabViewController.swift; sourceTree = "<group>"; };
+		56BBF99A2448CE620070D250 /* ItemsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsTabViewController.swift; sourceTree = "<group>"; };
 		76259A1D8D3D5C3637E944D9 /* Pods-ItemTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ItemTracker.release.xcconfig"; path = "Target Support Files/Pods-ItemTracker/Pods-ItemTracker.release.xcconfig"; sourceTree = "<group>"; };
 		9A287D4CF7DB30AC2EBCC806 /* Pods-ItemTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ItemTracker.debug.xcconfig"; path = "Target Support Files/Pods-ItemTracker/Pods-ItemTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		AE781340196B2D26991AB587 /* Pods_ItemTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ItemTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +114,7 @@
 			children = (
 				56BBF98C244782630070D250 /* RoundedView.swift */,
 				56BBF98E2448804A0070D250 /* UIButton+Extension.swift */,
+				56BBF9962448B4630070D250 /* UIViewController+Extension.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -119,7 +124,8 @@
 			children = (
 				56BBF990244887220070D250 /* SignInViewController.swift */,
 				56BBF9922448876A0070D250 /* SignUpViewController.swift */,
-				56BBF9962448B4630070D250 /* UIViewController+Extension.swift */,
+				56BBF9982448CE4F0070D250 /* LocationsTabViewController.swift */,
+				56BBF99A2448CE620070D250 /* ItemsTabViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -304,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56BBF9972448B4630070D250 /* UIViewController+Extension.swift in Sources */,
+				56BBF99B2448CE620070D250 /* ItemsTabViewController.swift in Sources */,
 				56BBF98D244782630070D250 /* RoundedView.swift in Sources */,
 				56BBF9932448876A0070D250 /* SignUpViewController.swift in Sources */,
 				56BBF991244887220070D250 /* SignInViewController.swift in Sources */,
@@ -311,6 +318,7 @@
 				56BBF99524489EFA0070D250 /* Constants.swift in Sources */,
 				56BBF98F2448804A0070D250 /* UIButton+Extension.swift in Sources */,
 				563191D7243C6C4A003E47C5 /* SceneDelegate.swift in Sources */,
+				56BBF9992448CE4F0070D250 /* LocationsTabViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9r1-iA-nlp">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -256,10 +257,36 @@ Sign in to start tracking your stuff!</string>
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <connections>
+                        <segue destination="e7v-Uq-6o6" kind="relationship" relationship="rootViewController" id="AYW-yI-lsC"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FhT-ee-zQg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="93" y="842"/>
+        </scene>
+        <!--Locations-->
+        <scene sceneID="LGY-ph-zBj">
+            <objects>
+                <viewController id="e7v-Uq-6o6" customClass="LocationsTabViewController" customModule="ItemTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UGs-LI-xeL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="1Tx-SU-JiD"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Locations" id="kJG-vb-6J6">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="gTF-Bv-Ogw"/>
+                        <barButtonItem key="rightBarButtonItem" title="LOGOUT" id="g3z-Se-4Wc">
+                            <connections>
+                                <action selector="logoutTapped:" destination="e7v-Uq-6o6" id="ZOp-bR-jdT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="36a-bO-JSP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="916" y="842"/>
         </scene>
         <!--Items-->
         <scene sceneID="p10-26-aow">
@@ -272,10 +299,36 @@ Sign in to start tracking your stuff!</string>
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <connections>
+                        <segue destination="79A-oK-3yH" kind="relationship" relationship="rootViewController" id="zgf-Tx-Z1p"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yYM-v2-HcK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="93" y="1546"/>
+        </scene>
+        <!--Items-->
+        <scene sceneID="0Z5-Gr-Z4U">
+            <objects>
+                <viewController id="79A-oK-3yH" customClass="ItemsTabViewController" customModule="ItemTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zbc-Gl-G8p">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="5f2-e9-3xH"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Items" id="StJ-st-hvP">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="jeM-m9-i2J"/>
+                        <barButtonItem key="rightBarButtonItem" title="LOGOUT" id="Ul8-Ak-IeR">
+                            <connections>
+                                <action selector="logoutTapped:" destination="79A-oK-3yH" id="yIb-3D-Lot"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jEJ-Ma-2ey" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="916" y="1546"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ljf-XH-1jh">
@@ -484,7 +537,7 @@ Sign in to start tracking your stuff!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yl0-MT-VgC" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="965" y="139"/>
+            <point key="canvasLocation" x="916" y="139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hPy-r7-XXJ">
