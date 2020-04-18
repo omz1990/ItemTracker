@@ -265,7 +265,7 @@ Sign in to start tracking your stuff!</string>
             </objects>
             <point key="canvasLocation" x="93" y="842"/>
         </scene>
-        <!--Locations-->
+        <!--My Locations-->
         <scene sceneID="LGY-ph-zBj">
             <objects>
                 <viewController id="e7v-Uq-6o6" customClass="LocationsTabViewController" customModule="ItemTracker" customModuleProvider="target" sceneMemberID="viewController">
@@ -275,7 +275,7 @@ Sign in to start tracking your stuff!</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="1Tx-SU-JiD"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Locations" id="kJG-vb-6J6">
+                    <navigationItem key="navigationItem" title="My Locations" id="kJG-vb-6J6">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="gTF-Bv-Ogw"/>
                         <barButtonItem key="rightBarButtonItem" title="LOGOUT" id="g3z-Se-4Wc">
                             <connections>
@@ -307,7 +307,7 @@ Sign in to start tracking your stuff!</string>
             </objects>
             <point key="canvasLocation" x="93" y="1546"/>
         </scene>
-        <!--Items-->
+        <!--My Items-->
         <scene sceneID="0Z5-Gr-Z4U">
             <objects>
                 <viewController id="79A-oK-3yH" customClass="ItemsTabViewController" customModule="ItemTracker" customModuleProvider="target" sceneMemberID="viewController">
@@ -317,7 +317,7 @@ Sign in to start tracking your stuff!</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="5f2-e9-3xH"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Items" id="StJ-st-hvP">
+                    <navigationItem key="navigationItem" title="My Items" id="StJ-st-hvP">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="jeM-m9-i2J"/>
                         <barButtonItem key="rightBarButtonItem" title="LOGOUT" id="Ul8-Ak-IeR">
                             <connections>

@@ -7,25 +7,32 @@
 //
 
 import UIKit
+import Firebase
 
 class LocationsTabViewController: UIViewController {
 
+    var ref: DatabaseReference!
+    var locations: [DataSnapshot] = []
+    fileprivate var _refHandle: DatabaseHandle!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        configureDatabase()
+        FirebaseClient.getLocations { (locations, error) in
+            print("FirebaseClient.getLocations closure")
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func configureDatabase() {
+        let locationPath = FirebaseClient.DatabaseCollection.location(uid: Auth.auth().currentUser?.uid ?? "").path
+      ref = Database.database().reference()
+        _refHandle = self.ref.child(locationPath).observe(.childAdded, with: { [weak self] (snapshot) -> Void in
+        guard let strongSelf = self else { return }
+        strongSelf.locations.append(snapshot)
+        print(strongSelf.locations)
+      })
     }
-    */
+    
     @IBAction func logoutTapped(_ sender: Any) {
         logout()
     }

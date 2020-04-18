@@ -12,6 +12,10 @@
 		563191DC243C6C4A003E47C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 563191DA243C6C4A003E47C5 /* Main.storyboard */; };
 		563191DE243C6C4C003E47C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 563191DD243C6C4C003E47C5 /* Assets.xcassets */; };
 		563191E1243C6C4C003E47C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 563191DF243C6C4C003E47C5 /* LaunchScreen.storyboard */; };
+		5633F97A244A2E820076B476 /* FirebaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5633F979244A2E820076B476 /* FirebaseClient.swift */; };
+		5633F97D244B3A870076B476 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5633F97C244B3A870076B476 /* Location.swift */; };
+		5633F97F244B3AC40076B476 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5633F97E244B3AC40076B476 /* Item.swift */; };
+		5633F981244B3D720076B476 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5633F980244B3D720076B476 /* Storage.swift */; };
 		56765C16243D6E220047CAE9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56765C15243D6E220047CAE9 /* GoogleService-Info.plist */; };
 		56BBF98D244782630070D250 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBF98C244782630070D250 /* RoundedView.swift */; };
 		56BBF98F2448804A0070D250 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBF98E2448804A0070D250 /* UIButton+Extension.swift */; };
@@ -32,6 +36,10 @@
 		563191DD243C6C4C003E47C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		563191E0243C6C4C003E47C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		563191E2243C6C4C003E47C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5633F979244A2E820076B476 /* FirebaseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseClient.swift; sourceTree = "<group>"; };
+		5633F97C244B3A870076B476 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		5633F97E244B3AC40076B476 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		5633F980244B3D720076B476 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		56765C15243D6E220047CAE9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		56BBF98C244782630070D250 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		56BBF98E2448804A0070D250 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
@@ -91,6 +99,24 @@
 			path = ItemTracker;
 			sourceTree = "<group>";
 		};
+		5633F978244A2E540076B476 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				5633F979244A2E820076B476 /* FirebaseClient.swift */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
+		5633F97B244B39C10076B476 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				5633F97C244B3A870076B476 /* Location.swift */,
+				5633F980244B3D720076B476 /* Storage.swift */,
+				5633F97E244B3AC40076B476 /* Item.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		5687A24924476A980025F1EB /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +131,8 @@
 		5687A24A24476AE70025F1EB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5633F97B244B39C10076B476 /* Data */,
+				5633F978244A2E540076B476 /* Client */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -310,14 +338,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				56BBF9972448B4630070D250 /* UIViewController+Extension.swift in Sources */,
+				5633F981244B3D720076B476 /* Storage.swift in Sources */,
 				56BBF99B2448CE620070D250 /* ItemsTabViewController.swift in Sources */,
 				56BBF98D244782630070D250 /* RoundedView.swift in Sources */,
 				56BBF9932448876A0070D250 /* SignUpViewController.swift in Sources */,
 				56BBF991244887220070D250 /* SignInViewController.swift in Sources */,
 				563191D5243C6C4A003E47C5 /* AppDelegate.swift in Sources */,
 				56BBF99524489EFA0070D250 /* Constants.swift in Sources */,
+				5633F97F244B3AC40076B476 /* Item.swift in Sources */,
+				5633F97A244A2E820076B476 /* FirebaseClient.swift in Sources */,
 				56BBF98F2448804A0070D250 /* UIButton+Extension.swift in Sources */,
 				563191D7243C6C4A003E47C5 /* SceneDelegate.swift in Sources */,
+				5633F97D244B3A870076B476 /* Location.swift in Sources */,
 				56BBF9992448CE4F0070D250 /* LocationsTabViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
