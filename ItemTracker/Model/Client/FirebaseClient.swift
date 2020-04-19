@@ -71,10 +71,15 @@ class FirebaseClient {
                     completion(nil, error)
                     return
                 }
-                
+                print("Locations: \(locations)")
                 locations.forEach { (location) in
                     getStoragesList(uid: uid, locationId: location.id, dbRef: dbRef) { (storages, error) in
                         print("Storages: \(storages)")
+                        storages?.forEach({ (storage) in
+                            getItemsList(uid: uid, locationId: storage.locationId, storageId: storage.id, dbRef: dbRef) { (items, error) in
+                                print("Items: \(items)")
+                            }
+                        })
                     }
                 }
             }
@@ -140,6 +145,31 @@ class FirebaseClient {
     }
     
     class func getItemsList(uid: String, locationId: String, storageId: String, dbRef: DatabaseReference, completion: @escaping ([Item]?, Error?) -> Void) {
-        
+        let path = "\(DatabaseCollection.item(uid: uid).path)/\(locationId)/\(storageId)"
+
+        dbRef.child(path).observeSingleEvent(of: .value) { (snapshot) in
+            let itemsDict = snapshot.value as? [String: AnyObject]
+            var items: [Item] = []
+
+            itemsDict?.forEach({ (arg0) in
+                let (itemId, itemObject) = arg0
+                let storageId: String = itemObject.value(forKey: DatabaseField.Common.storageId) as? String ?? ""
+                let locationId: String = itemObject.value(forKey: DatabaseField.Common.locationId) as? String ?? ""
+                let name: String = itemObject.value(forKey: DatabaseField.Common.name) as? String ?? ""
+                let description: String? = itemObject.value(forKey: DatabaseField.Common.description) as? String
+                let imageUrl: String? = itemObject.value(forKey: DatabaseField.Common.imageUrl) as? String
+                let type: String = itemObject.value(forKey: DatabaseField.Common.type) as? String ?? ""
+                let tags: [String]? = itemObject.value(forKey: DatabaseField.Common.tags) as? [String]
+                let createdAtTimestamp: Double = itemObject.value(forKey: DatabaseField.Common.createdAt) as? Double ?? 0
+                let createdAt: Date = Date(timeIntervalSince1970: createdAtTimestamp)
+                let updatedAtTimestamp: Double = itemObject.value(forKey: DatabaseField.Common.updatedAt) as? Double ?? 0
+                let updatedAt: Date = Date(timeIntervalSince1970: updatedAtTimestamp)
+
+                let item = Item(id: itemId, storageId: storageId, locationId: locationId, name: name, description: description, imageUrl: imageUrl, type: type, tags: tags, createdAt: createdAt, updatedAt: updatedAt)
+
+                items.append(item)
+            })
+            completion(items, nil)
+        }
     }
 }
