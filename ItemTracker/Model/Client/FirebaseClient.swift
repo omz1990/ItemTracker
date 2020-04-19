@@ -30,34 +30,35 @@ class FirebaseClient {
     
     struct DatabaseField {
         struct Common {
-            let name = "name"
-            let description = "description"
-            let imageUrl = "imageUrl"
-            let type = "type"
-            let tags = "tags"
-            let createdAt = "createdAt"
-            let updatedAt = "updatedAt"
-            let storageId = "storageId"
-            let locationId = "locationId"
+            static let name = "name"
+            static let description = "description"
+            static let imageUrl = "imageUrl"
+            static let type = "type"
+            static let tags = "tags"
+            static let createdAt = "createdAt"
+            static let updatedAt = "updatedAt"
+            static let storageId = "storageId"
+            static let locationId = "locationId"
         }
 
         struct User {
-            let email = "email"
-            let accountType = "accountType"
+            static let email = "email"
+            static let accountType = "accountType"
         }
 
         struct Location {
-            let subType = "subType"
+            static let subName = "subName"
+            static let subType = "subType"
         }
 
         struct Types {
-            let location = "location"
-            let subLocation = "subLocation"
-            let locationTags = "locationTags"
-            let storage = "storage"
-            let item = "item"
-            let itemTags = "itemTags"
-            let accountType = "accountType"
+            static let location = "location"
+            static let subLocation = "subLocation"
+            static let locationTags = "locationTags"
+            static let storage = "storage"
+            static let item = "item"
+            static let itemTags = "itemTags"
+            static let accountType = "accountType"
         }
     }
     
@@ -74,15 +75,34 @@ class FirebaseClient {
         let path = DatabaseCollection.location(uid: uid).path
         dbRef.child(path).observeSingleEvent(of: .value) { (snapshot) in
             let locationsDict = snapshot.value as? [String: AnyObject]
-            print("getLocationsList: \(locationsDict)")
+            var locations: [Location] = []
+            
+            locationsDict?.forEach({ (arg0) in
+                let (locationId, locationObject) = arg0
+                let name: String = locationObject.value(forKey: DatabaseField.Common.name) as? String ?? ""
+                let subName: String? = locationObject.value(forKey: DatabaseField.Location.subName) as? String
+                let description: String? = locationObject.value(forKey: DatabaseField.Common.description) as? String
+                let imageUrl: String? = locationObject.value(forKey: DatabaseField.Common.imageUrl) as? String
+                let type: String = locationObject.value(forKey: DatabaseField.Common.type) as? String ?? ""
+                let subType: String = locationObject.value(forKey: DatabaseField.Location.subType) as? String ?? ""
+                let tags: [String]? = locationObject.value(forKey: DatabaseField.Common.tags) as? [String]
+                let createdAtTimestamp: Double = locationObject.value(forKey: DatabaseField.Common.createdAt) as? Double ?? 0
+                let createdAt: Date = Date(timeIntervalSince1970: createdAtTimestamp)
+                let updatedAtTimestamp: Double = locationObject.value(forKey: DatabaseField.Common.updatedAt) as? Double ?? 0
+                let updatedAt: Date = Date(timeIntervalSince1970: updatedAtTimestamp)
+                
+                let location = Location(id: locationId, name: name, subName: subName, description: description, imageUrl: imageUrl, type: type, subType: subType, tags: tags, createdAt: createdAt, updatedAt: updatedAt, storages: nil)
+                locations.append(location)
+            })
+            completion(locations, nil)
         }
     }
     
-    class func getStoragesList(uid: String, dbRef: DatabaseReference, completion: @escaping ([Storage]?, Error?) -> Void) {
+    class func getStoragesList(uid: String, locationId: String, dbRef: DatabaseReference, completion: @escaping ([Storage]?, Error?) -> Void) {
         
     }
     
-    class func getItemsList(uid: String, dbRef: DatabaseReference, completion: @escaping ([Item]?, Error?) -> Void) {
+    class func getItemsList(uid: String, locationId: String, storageId: String, dbRef: DatabaseReference, completion: @escaping ([Item]?, Error?) -> Void) {
         
     }
 }
