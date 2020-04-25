@@ -13,24 +13,23 @@ class LocationsTabViewController: UIViewController {
 
     var ref: DatabaseReference!
     var locations: [DataSnapshot] = []
-    fileprivate var _refHandle: DatabaseHandle!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureDatabase()
-        FirebaseClient.getLocations { (locations, error) in
-            print("FirebaseClient.getLocations closure")
-        }
+        fetchLocations()
     }
     
-    func configureDatabase() {
-        let locationPath = FirebaseClient.DatabaseCollection.location(uid: Auth.auth().currentUser?.uid ?? "").path
-      ref = Database.database().reference()
-        _refHandle = self.ref.child(locationPath).observe(.childAdded, with: { [weak self] (snapshot) -> Void in
-        guard let strongSelf = self else { return }
-        strongSelf.locations.append(snapshot)
-        print(strongSelf.locations)
-      })
+    private func fetchLocations() {
+        FirebaseClient.getLocations { (locations, error) in
+            print("FirebaseClient.getLocations closure")
+            print("Total Locations: \(locations?.count ?? 0)")
+            locations?.forEach({ (location) in
+                print("Total storages for location: \(location.name) : \(location.storages?.count ?? 0)")
+                location.storages?.forEach({ (storage) in
+                    print("Total items for storage: \(storage.name) : \(storage.items?.count ?? 0)")
+                })
+            })
+        }
     }
     
     @IBAction func logoutTapped(_ sender: Any) {

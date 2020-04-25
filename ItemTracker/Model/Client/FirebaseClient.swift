@@ -14,21 +14,42 @@ class FirebaseClient {
     class func getLocations(completion: @escaping ([Location]?, Error?) -> Void) {
         if let uid = Auth.auth().currentUser?.uid {
             let dbRef = Database.database().reference()
-            getLocationsList(uid: uid, dbRef: dbRef, completion: completion)
+            
             getLocationsList(uid: uid, dbRef: dbRef) { (locations, error) in
                 guard let locations = locations else {
                     completion(nil, error)
                     return
                 }
-                print("Locations: \(locations)")
-                locations.forEach { (location) in
+                
+                // mappedLocations list will be used to aggregate the responses of storages and items into their respective locations
+                var mappedLocations: [Location] = locations
+                
+                for (locationIndex, location) in locations.enumerated() {
+                    
                     getStoragesList(uid: uid, locationId: location.id, dbRef: dbRef) { (storages, error) in
-                        print("Storages: \(storages)")
-                        storages?.forEach({ (storage) in
-                            getItemsList(uid: uid, locationId: storage.locationId, storageId: storage.id, dbRef: dbRef) { (items, error) in
-                                print("Items: \(items)")
+                        // If there are no storages, we can simply return the locations list
+                        guard let storages = storages else {
+                            completion(mappedLocations, error)
+                            return
+                        }
+                        
+                        mappedLocations[locationIndex].storages = storages
+                        
+                        if (storages.isEmpty) {
+                            completion(mappedLocations, error)
+                        } else {
+                            for (storageIndex, storage) in storages.enumerated() {
+                                // Get items for each storage
+                                getItemsList(uid: uid, locationId: storage.locationId, storageId: storage.id, dbRef: dbRef) { (items, error) in
+                                    mappedLocations[locationIndex].storages?[storageIndex].items = items
+                                    
+                                    // If this is the last storage, return the mapped locations array to the completion handler
+                                    if storageIndex == storages.count - 1 {
+                                        completion(mappedLocations, nil)
+                                    }
+                                }
                             }
-                        })
+                        }
                     }
                 }
             }
@@ -48,7 +69,7 @@ class FirebaseClient {
                 let (locationId, locationObject) = arg0
                 locations.append(mapLocationDictionaryToStruct(locationId, locationObject))
             })
-            completion(locations, nil)
+            completion(locations.isEmpty ? nil : locations, nil)
         }
     }
     
@@ -63,7 +84,7 @@ class FirebaseClient {
                 let(storageId, storageObject) = arg0
                 storages.append(mapStorageDictionaryToStruct(storageId, storageObject))
             })
-            completion(storages, nil)
+            completion(storages.isEmpty ? nil : storages, nil)
         }
     }
     
@@ -78,7 +99,7 @@ class FirebaseClient {
                 let (itemId, itemObject) = arg0
                 items.append(mapItemDictionaryToStruct(itemId, itemObject))
             })
-            completion(items, nil)
+            completion(items.isEmpty ? nil : items, nil)
         }
     }
     
