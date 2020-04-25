@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		56069C3A245458A0003F6125 /* LocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56069C39245458A0003F6125 /* LocationCollectionViewCell.swift */; };
 		563191D5243C6C4A003E47C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563191D4243C6C4A003E47C5 /* AppDelegate.swift */; };
 		563191D7243C6C4A003E47C5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563191D6243C6C4A003E47C5 /* SceneDelegate.swift */; };
 		563191DC243C6C4A003E47C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 563191DA243C6C4A003E47C5 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		56069C39245458A0003F6125 /* LocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCollectionViewCell.swift; sourceTree = "<group>"; };
 		563191D1243C6C4A003E47C5 /* ItemTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ItemTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		563191D4243C6C4A003E47C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		563191D6243C6C4A003E47C5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				56BBF98C244782630070D250 /* RoundedView.swift */,
 				56BBF98E2448804A0070D250 /* UIButton+Extension.swift */,
 				56BBF9962448B4630070D250 /* UIViewController+Extension.swift */,
+				56069C39245458A0003F6125 /* LocationCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 			files = (
 				56BBF9972448B4630070D250 /* UIViewController+Extension.swift in Sources */,
 				5633F981244B3D720076B476 /* Storage.swift in Sources */,
+				56069C3A245458A0003F6125 /* LocationCollectionViewCell.swift in Sources */,
 				56BBF99B2448CE620070D250 /* ItemsTabViewController.swift in Sources */,
 				56BBF98D244782630070D250 /* RoundedView.swift in Sources */,
 				56BBF9932448876A0070D250 /* SignUpViewController.swift in Sources */,

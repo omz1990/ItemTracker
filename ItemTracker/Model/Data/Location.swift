@@ -20,4 +20,12 @@ struct Location {
     let createdAt: Date
     let updatedAt: Date
     var storages: [Storage]?
+    
+    func getTotalItemsCount() -> Int {
+        var itemsCount = 0
+        storages?.forEach({ (storage) in
+            itemsCount += storage.items?.count ?? 0
+        })
+        return itemsCount
+    }
 }

@@ -20,6 +20,10 @@ struct Constants {
     struct Segues {
     }
     
+    struct View {
+        static let LocationCell = "locationCell"
+    }
+    
     struct NotificationKeys {
         static let SignedIn = "onSignInCompleted"
     }
