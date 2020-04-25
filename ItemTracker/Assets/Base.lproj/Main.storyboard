@@ -383,6 +383,9 @@ Sign in to start tracking your stuff!</string>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="kBV-40-Wec">
                                 <rect key="frame" x="8" y="145" width="398" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="e7v-Uq-6o6" id="cb5-DB-uUj"/>
+                                </connections>
                             </searchBar>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="IqG-Lc-VqI">
                                 <rect key="frame" x="197" y="440.5" width="20" height="20"/>
@@ -416,6 +419,7 @@ Sign in to start tracking your stuff!</string>
                         <outlet property="activityIndicator" destination="IqG-Lc-VqI" id="4MK-aO-h3f"/>
                         <outlet property="collectionView" destination="XLi-aa-Z36" id="Jzv-c4-h3Q"/>
                         <outlet property="flowLayout" destination="lX7-Ih-iiV" id="rKA-yE-sSz"/>
+                        <outlet property="searchBar" destination="kBV-40-Wec" id="NGF-dx-PLM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="36a-bO-JSP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
