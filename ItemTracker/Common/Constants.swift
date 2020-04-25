@@ -22,6 +22,7 @@ struct Constants {
     
     struct View {
         static let LocationCell = "locationCell"
+        static let ItemRow = "itemRow"
     }
     
     struct NotificationKeys {

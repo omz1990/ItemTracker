@@ -23,7 +23,12 @@ class SignInViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        initGoogleSignInListener()
+        
+        if Auth.auth().currentUser != nil {
+            self.presentViewController(storyboardId: Constants.StoryboardId.MainTabsController)
+        } else {
+            initGoogleSignInListener()
+        }
     }
     
     override func viewDidLoad() {
@@ -31,10 +36,6 @@ class SignInViewController: UIViewController {
         
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().presentingViewController = self
-            
-        if (GIDSignIn.sharedInstance().hasPreviousSignIn()) {
-          GIDSignIn.sharedInstance().restorePreviousSignIn()
-        }
     }
     
     private func initGoogleSignInListener() {
