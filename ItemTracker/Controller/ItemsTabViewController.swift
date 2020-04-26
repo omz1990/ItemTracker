@@ -12,6 +12,7 @@ class ItemsTabViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var allLocations: [Location] = []
     var allItems: [Item] = []
@@ -57,6 +58,7 @@ class ItemsTabViewController: UIViewController {
     }
 }
 
+// MARK: Extension to handle Table View
 extension ItemsTabViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -77,4 +79,34 @@ extension ItemsTabViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+}
+
+// MARK: Extension to handle Search bar
+extension ItemsTabViewController: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            displayedItems = allItems
+        } else {
+            displayedItems = allItems.filter({ (item) -> Bool in
+                return item.name.containsIgnoringCase(searchText)
+            })
+        }
+        tableView?.reloadData()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+        searchBar.text = ""
+        displayedItems = allItems
+        tableView?.reloadData()
+    }
 }

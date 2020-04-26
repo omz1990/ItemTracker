@@ -463,6 +463,9 @@ Sign in to start tracking your stuff!</string>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search item" translatesAutoresizingMaskIntoConstraints="NO" id="Qpn-iO-Ois">
                                 <rect key="frame" x="8" y="145" width="398" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="79A-oK-3yH" id="eMO-Nh-x3U"/>
+                                </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GW0-z6-amC">
                                 <rect key="frame" x="0.0" y="201" width="414" height="612"/>
@@ -575,6 +578,7 @@ Sign in to start tracking your stuff!</string>
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="8iW-fo-ild" id="ky1-Qb-B5o"/>
+                        <outlet property="searchBar" destination="Qpn-iO-Ois" id="n4r-cT-Gpf"/>
                         <outlet property="tableView" destination="GW0-z6-amC" id="r6s-fb-Ins"/>
                     </connections>
                 </viewController>
