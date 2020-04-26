@@ -20,4 +20,18 @@ struct Location {
     let createdAt: Date
     let updatedAt: Date
     var storages: [Storage]?
+    
+    func getDisplayName() -> String {
+        // If there is a subName, prepend a `/` to it and combine the 
+        let locationSubName = subName?.isEmpty == true ? "" : "/\(subName ?? "")"
+        return "\(name)\(locationSubName)"
+    }
+    
+    func getTotalItemsCount() -> Int {
+        var itemsCount = 0
+        storages?.forEach({ (storage) in
+            itemsCount += storage.items?.count ?? 0
+        })
+        return itemsCount
+    }
 }

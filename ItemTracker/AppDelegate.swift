@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         guard #available(iOS 13.0, *) else {
             FirebaseApp.configure()
+            Database.database().isPersistenceEnabled = true
             GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
             GIDSignIn.sharedInstance().delegate = self
             return true

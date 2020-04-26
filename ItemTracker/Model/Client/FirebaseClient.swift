@@ -10,6 +10,157 @@ import Firebase
 
 class FirebaseClient {
     
+    // MARK: Public methods to access Data from Firebase
+    class func getLocations(completion: @escaping ([Location]?, Error?) -> Void) {
+        if let uid = Auth.auth().currentUser?.uid {
+            let dbRef = Database.database().reference()
+            
+            getLocationsList(uid: uid, dbRef: dbRef) { (locations, error) in
+                guard let locations = locations else {
+                    completion(nil, error)
+                    return
+                }
+                
+                // mappedLocations list will be used to aggregate the responses of storages and items into their respective locations
+                var mappedLocations: [Location] = locations
+                
+                for (locationIndex, location) in locations.enumerated() {
+                    
+                    getStoragesList(uid: uid, locationId: location.id, dbRef: dbRef) { (storages, error) in
+                        // If there are no storages, we can simply return the locations list
+                        guard let storages = storages else {
+                            completion(mappedLocations, error)
+                            return
+                        }
+                        
+                        mappedLocations[locationIndex].storages = storages
+                        
+                        if (storages.isEmpty) {
+                            completion(mappedLocations, error)
+                        } else {
+                            for (storageIndex, storage) in storages.enumerated() {
+                                // Get items for each storage
+                                getItemsList(uid: uid, locationId: storage.locationId, storageId: storage.id, dbRef: dbRef) { (items, error) in
+                                    
+                                    // Add the Location names and Storage names for convenience here to reduce future parsing
+                                    let itemsWithLocationAndStorageNames: [Item]? = items?.map({ (item) -> Item in
+                                        var newItem = item
+                                        newItem.locationName = location.getDisplayName()
+                                        newItem.storageName = storage.name
+                                        return newItem
+                                    })
+                                    
+                                    mappedLocations[locationIndex].storages?[storageIndex].items = itemsWithLocationAndStorageNames
+                                    
+                                    // If this is the last storage, return the mapped locations array to the completion handler
+                                    if storageIndex == storages.count - 1 {
+                                        completion(mappedLocations, nil)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            completion(nil, nil)
+        }
+    }
+    
+    // MARK: Fetch data from Firebase
+    private class func getLocationsList(uid: String, dbRef: DatabaseReference, completion: @escaping ([Location]?, Error?) -> Void) {
+        let path = DatabaseCollection.location(uid: uid).path
+        dbRef.child(path).observeSingleEvent(of: .value) { (snapshot) in
+            let locationsDict = snapshot.value as? [String: AnyObject]
+            var locations: [Location] = []
+            
+            locationsDict?.forEach({ (arg0) in
+                let (locationId, locationObject) = arg0
+                locations.append(mapLocationDictionaryToStruct(locationId, locationObject))
+            })
+            completion(locations.isEmpty ? nil : locations, nil)
+        }
+    }
+    
+    private class func getStoragesList(uid: String, locationId: String, dbRef: DatabaseReference, completion: @escaping ([Storage]?, Error?) -> Void) {
+        let path = "\(DatabaseCollection.storage(uid: uid).path)/\(locationId)"
+        
+        dbRef.child(path).observeSingleEvent(of: .value) { (snapshot) in
+            let storagesDict = snapshot.value as? [String: AnyObject]
+            var storages: [Storage] = []
+            
+            storagesDict?.forEach({ (arg0) in
+                let(storageId, storageObject) = arg0
+                storages.append(mapStorageDictionaryToStruct(storageId, storageObject))
+            })
+            completion(storages.isEmpty ? nil : storages, nil)
+        }
+    }
+    
+    private class func getItemsList(uid: String, locationId: String, storageId: String, dbRef: DatabaseReference, completion: @escaping ([Item]?, Error?) -> Void) {
+        let path = "\(DatabaseCollection.item(uid: uid).path)/\(locationId)/\(storageId)"
+
+        dbRef.child(path).observeSingleEvent(of: .value) { (snapshot) in
+            let itemsDict = snapshot.value as? [String: AnyObject]
+            var items: [Item] = []
+
+            itemsDict?.forEach({ (arg0) in
+                let (itemId, itemObject) = arg0
+                items.append(mapItemDictionaryToStruct(itemId, itemObject))
+            })
+            completion(items.isEmpty ? nil : items, nil)
+        }
+    }
+    
+    // MARK: Mappers to parse Firebase Dictionary Objects into local Structs
+    private class func mapLocationDictionaryToStruct(_ locationId: String, _ locationObject: AnyObject) -> Location {
+        let name: String = locationObject.value(forKey: DatabaseField.Common.name) as? String ?? ""
+        let subName: String? = locationObject.value(forKey: DatabaseField.Location.subName) as? String
+        let description: String? = locationObject.value(forKey: DatabaseField.Common.description) as? String
+        let imageUrl: String? = locationObject.value(forKey: DatabaseField.Common.imageUrl) as? String
+        let type: String = locationObject.value(forKey: DatabaseField.Common.type) as? String ?? ""
+        let subType: String = locationObject.value(forKey: DatabaseField.Location.subType) as? String ?? ""
+        let tags: [String]? = locationObject.value(forKey: DatabaseField.Common.tags) as? [String]
+        let createdAtTimestamp: Double = locationObject.value(forKey: DatabaseField.Common.createdAt) as? Double ?? 0
+        let createdAt: Date = Date(timeIntervalSince1970: createdAtTimestamp)
+        let updatedAtTimestamp: Double = locationObject.value(forKey: DatabaseField.Common.updatedAt) as? Double ?? 0
+        let updatedAt: Date = Date(timeIntervalSince1970: updatedAtTimestamp)
+        
+        return Location(id: locationId, name: name, subName: subName, description: description, imageUrl: imageUrl, type: type, subType: subType, tags: tags, createdAt: createdAt, updatedAt: updatedAt, storages: nil)
+    }
+    
+    private class func mapStorageDictionaryToStruct(_ storageId: String, _ storageObject: AnyObject) -> Storage {
+        let locationId: String = storageObject.value(forKey: DatabaseField.Common.locationId) as? String ?? ""
+        let name: String = storageObject.value(forKey: DatabaseField.Common.name) as? String ?? ""
+        let description: String? = storageObject.value(forKey: DatabaseField.Common.description) as? String
+        let imageUrl: String? = storageObject.value(forKey: DatabaseField.Common.imageUrl) as? String
+        let type: String = storageObject.value(forKey: DatabaseField.Common.type) as? String ?? ""
+        let tags: [String]? = storageObject.value(forKey: DatabaseField.Common.tags) as? [String]
+        let createdAtTimestamp: Double = storageObject.value(forKey: DatabaseField.Common.createdAt) as? Double ?? 0
+        let createdAt: Date = Date(timeIntervalSince1970: createdAtTimestamp)
+        let updatedAtTimestamp: Double = storageObject.value(forKey: DatabaseField.Common.updatedAt) as? Double ?? 0
+        let updatedAt: Date = Date(timeIntervalSince1970: updatedAtTimestamp)
+        
+        return Storage(id: storageId, locationId: locationId, name: name, description: description, imageUrl: imageUrl, type: type, tags: tags, createdAt: createdAt, updatedAt: updatedAt, items: nil)
+    }
+    
+    private class func mapItemDictionaryToStruct(_ itemId: String, _ itemObject: AnyObject) -> Item {
+        let storageId: String = itemObject.value(forKey: DatabaseField.Common.storageId) as? String ?? ""
+        let locationId: String = itemObject.value(forKey: DatabaseField.Common.locationId) as? String ?? ""
+        let name: String = itemObject.value(forKey: DatabaseField.Common.name) as? String ?? ""
+        let description: String? = itemObject.value(forKey: DatabaseField.Common.description) as? String
+        let imageUrl: String? = itemObject.value(forKey: DatabaseField.Common.imageUrl) as? String
+        let type: String = itemObject.value(forKey: DatabaseField.Common.type) as? String ?? ""
+        let tags: [String]? = itemObject.value(forKey: DatabaseField.Common.tags) as? [String]
+        let createdAtTimestamp: Double = itemObject.value(forKey: DatabaseField.Common.createdAt) as? Double ?? 0
+        let createdAt: Date = Date(timeIntervalSince1970: createdAtTimestamp)
+        let updatedAtTimestamp: Double = itemObject.value(forKey: DatabaseField.Common.updatedAt) as? Double ?? 0
+        let updatedAt: Date = Date(timeIntervalSince1970: updatedAtTimestamp)
+
+        return Item(id: itemId, storageId: storageId, storageName: nil, locationId: locationId, locationName: nil, name: name, description: description, imageUrl: imageUrl, type: type, tags: tags, createdAt: createdAt, updatedAt: updatedAt)
+    }
+    
+    // MARK: Database Collections and Field name Constants
     enum DatabaseCollection {
         case users(uid: String)
         case location(uid: String)
@@ -59,117 +210,6 @@ class FirebaseClient {
             static let item = "item"
             static let itemTags = "itemTags"
             static let accountType = "accountType"
-        }
-    }
-    
-    class func getLocations(completion: @escaping ([Location]?, Error?) -> Void) {
-        if let uid = Auth.auth().currentUser?.uid {
-            let dbRef = Database.database().reference()
-            getLocationsList(uid: uid, dbRef: dbRef, completion: completion)
-            getLocationsList(uid: uid, dbRef: dbRef) { (locations, error) in
-                guard let locations = locations else {
-                    completion(nil, error)
-                    return
-                }
-                print("Locations: \(locations)")
-                locations.forEach { (location) in
-                    getStoragesList(uid: uid, locationId: location.id, dbRef: dbRef) { (storages, error) in
-                        print("Storages: \(storages)")
-                        storages?.forEach({ (storage) in
-                            getItemsList(uid: uid, locationId: storage.locationId, storageId: storage.id, dbRef: dbRef) { (items, error) in
-                                print("Items: \(items)")
-                            }
-                        })
-                    }
-                }
-            }
-        } else {
-            completion(nil, nil)
-        }
-    }
-    
-    class func getLocationsList(uid: String, dbRef: DatabaseReference, completion: @escaping ([Location]?, Error?) -> Void) {
-        let path = DatabaseCollection.location(uid: uid).path
-        dbRef.child(path).observeSingleEvent(of: .value) { (snapshot) in
-            let locationsDict = snapshot.value as? [String: AnyObject]
-            var locations: [Location] = []
-            
-            locationsDict?.forEach({ (arg0) in
-                let (locationId, locationObject) = arg0
-                let name: String = locationObject.value(forKey: DatabaseField.Common.name) as? String ?? ""
-                let subName: String? = locationObject.value(forKey: DatabaseField.Location.subName) as? String
-                let description: String? = locationObject.value(forKey: DatabaseField.Common.description) as? String
-                let imageUrl: String? = locationObject.value(forKey: DatabaseField.Common.imageUrl) as? String
-                let type: String = locationObject.value(forKey: DatabaseField.Common.type) as? String ?? ""
-                let subType: String = locationObject.value(forKey: DatabaseField.Location.subType) as? String ?? ""
-                let tags: [String]? = locationObject.value(forKey: DatabaseField.Common.tags) as? [String]
-                let createdAtTimestamp: Double = locationObject.value(forKey: DatabaseField.Common.createdAt) as? Double ?? 0
-                let createdAt: Date = Date(timeIntervalSince1970: createdAtTimestamp)
-                let updatedAtTimestamp: Double = locationObject.value(forKey: DatabaseField.Common.updatedAt) as? Double ?? 0
-                let updatedAt: Date = Date(timeIntervalSince1970: updatedAtTimestamp)
-                
-                let location = Location(id: locationId, name: name, subName: subName, description: description, imageUrl: imageUrl, type: type, subType: subType, tags: tags, createdAt: createdAt, updatedAt: updatedAt, storages: nil)
-                
-                locations.append(location)
-            })
-            completion(locations, nil)
-        }
-    }
-    
-    class func getStoragesList(uid: String, locationId: String, dbRef: DatabaseReference, completion: @escaping ([Storage]?, Error?) -> Void) {
-        let path = "\(DatabaseCollection.storage(uid: uid).path)/\(locationId)"
-        
-        dbRef.child(path).observeSingleEvent(of: .value) { (snapshot) in
-            let storagesDict = snapshot.value as? [String: AnyObject]
-            var storages: [Storage] = []
-            
-            storagesDict?.forEach({ (arg0) in
-                let(storageId, storageObject) = arg0
-                let locationId: String = storageObject.value(forKey: DatabaseField.Common.locationId) as? String ?? ""
-                let name: String = storageObject.value(forKey: DatabaseField.Common.name) as? String ?? ""
-                let description: String? = storageObject.value(forKey: DatabaseField.Common.description) as? String
-                let imageUrl: String? = storageObject.value(forKey: DatabaseField.Common.imageUrl) as? String
-                let type: String = storageObject.value(forKey: DatabaseField.Common.type) as? String ?? ""
-                let tags: [String]? = storageObject.value(forKey: DatabaseField.Common.tags) as? [String]
-                let createdAtTimestamp: Double = storageObject.value(forKey: DatabaseField.Common.createdAt) as? Double ?? 0
-                let createdAt: Date = Date(timeIntervalSince1970: createdAtTimestamp)
-                let updatedAtTimestamp: Double = storageObject.value(forKey: DatabaseField.Common.updatedAt) as? Double ?? 0
-                let updatedAt: Date = Date(timeIntervalSince1970: updatedAtTimestamp)
-                
-                let storage = Storage(id: storageId, locationId: locationId, name: name, description: description, imageUrl: imageUrl, type: type, tags: tags, createdAt: createdAt, updatedAt: updatedAt, items: nil)
-                
-                storages.append(storage)
-            })
-            completion(storages, nil)
-        }
-    }
-    
-    class func getItemsList(uid: String, locationId: String, storageId: String, dbRef: DatabaseReference, completion: @escaping ([Item]?, Error?) -> Void) {
-        let path = "\(DatabaseCollection.item(uid: uid).path)/\(locationId)/\(storageId)"
-
-        dbRef.child(path).observeSingleEvent(of: .value) { (snapshot) in
-            let itemsDict = snapshot.value as? [String: AnyObject]
-            var items: [Item] = []
-
-            itemsDict?.forEach({ (arg0) in
-                let (itemId, itemObject) = arg0
-                let storageId: String = itemObject.value(forKey: DatabaseField.Common.storageId) as? String ?? ""
-                let locationId: String = itemObject.value(forKey: DatabaseField.Common.locationId) as? String ?? ""
-                let name: String = itemObject.value(forKey: DatabaseField.Common.name) as? String ?? ""
-                let description: String? = itemObject.value(forKey: DatabaseField.Common.description) as? String
-                let imageUrl: String? = itemObject.value(forKey: DatabaseField.Common.imageUrl) as? String
-                let type: String = itemObject.value(forKey: DatabaseField.Common.type) as? String ?? ""
-                let tags: [String]? = itemObject.value(forKey: DatabaseField.Common.tags) as? [String]
-                let createdAtTimestamp: Double = itemObject.value(forKey: DatabaseField.Common.createdAt) as? Double ?? 0
-                let createdAt: Date = Date(timeIntervalSince1970: createdAtTimestamp)
-                let updatedAtTimestamp: Double = itemObject.value(forKey: DatabaseField.Common.updatedAt) as? Double ?? 0
-                let updatedAt: Date = Date(timeIntervalSince1970: updatedAtTimestamp)
-
-                let item = Item(id: itemId, storageId: storageId, locationId: locationId, name: name, description: description, imageUrl: imageUrl, type: type, tags: tags, createdAt: createdAt, updatedAt: updatedAt)
-
-                items.append(item)
-            })
-            completion(items, nil)
         }
     }
 }
