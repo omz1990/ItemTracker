@@ -11,7 +11,9 @@ import Foundation
 struct Item {
     let id: String
     let storageId: String
+    var storageName: String?
     let locationId: String
+    var locationName: String?
     let name: String
     let description: String?
     let imageUrl: String?

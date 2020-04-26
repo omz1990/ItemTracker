@@ -41,7 +41,16 @@ class FirebaseClient {
                             for (storageIndex, storage) in storages.enumerated() {
                                 // Get items for each storage
                                 getItemsList(uid: uid, locationId: storage.locationId, storageId: storage.id, dbRef: dbRef) { (items, error) in
-                                    mappedLocations[locationIndex].storages?[storageIndex].items = items
+                                    
+                                    // Add the Location names and Storage names for convenience here to reduce future parsing
+                                    let itemsWithLocationAndStorageNames: [Item]? = items?.map({ (item) -> Item in
+                                        var newItem = item
+                                        newItem.locationName = location.getDisplayName()
+                                        newItem.storageName = storage.name
+                                        return newItem
+                                    })
+                                    
+                                    mappedLocations[locationIndex].storages?[storageIndex].items = itemsWithLocationAndStorageNames
                                     
                                     // If this is the last storage, return the mapped locations array to the completion handler
                                     if storageIndex == storages.count - 1 {
@@ -148,7 +157,7 @@ class FirebaseClient {
         let updatedAtTimestamp: Double = itemObject.value(forKey: DatabaseField.Common.updatedAt) as? Double ?? 0
         let updatedAt: Date = Date(timeIntervalSince1970: updatedAtTimestamp)
 
-        return Item(id: itemId, storageId: storageId, locationId: locationId, name: name, description: description, imageUrl: imageUrl, type: type, tags: tags, createdAt: createdAt, updatedAt: updatedAt)
+        return Item(id: itemId, storageId: storageId, storageName: nil, locationId: locationId, locationName: nil, name: name, description: description, imageUrl: imageUrl, type: type, tags: tags, createdAt: createdAt, updatedAt: updatedAt)
     }
     
     // MARK: Database Collections and Field name Constants

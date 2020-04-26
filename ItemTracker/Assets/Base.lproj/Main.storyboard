@@ -380,7 +380,7 @@ Sign in to start tracking your stuff!</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="kBV-40-Wec">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search location" translatesAutoresizingMaskIntoConstraints="NO" id="kBV-40-Wec">
                                 <rect key="frame" x="8" y="145" width="398" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -460,7 +460,7 @@ Sign in to start tracking your stuff!</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="Qpn-iO-Ois">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search item" translatesAutoresizingMaskIntoConstraints="NO" id="Qpn-iO-Ois">
                                 <rect key="frame" x="8" y="145" width="398" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
@@ -468,7 +468,7 @@ Sign in to start tracking your stuff!</string>
                                 <rect key="frame" x="0.0" y="201" width="414" height="612"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="itemRow" rowHeight="93" id="FBL-y4-uEs" customClass="ItemTableViewCell" customModule="ItemTracker" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="itemTableRow" rowHeight="93" id="FBL-y4-uEs" customClass="ItemTableViewCell" customModule="ItemTracker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FBL-y4-uEs" id="Qm4-JA-JqD">
@@ -539,12 +539,21 @@ Sign in to start tracking your stuff!</string>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="79A-oK-3yH" id="pHa-kk-U4r"/>
+                                    <outlet property="delegate" destination="79A-oK-3yH" id="1sS-Tj-j7S"/>
+                                </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="8iW-fo-ild">
+                                <rect key="frame" x="197" y="440.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="8iW-fo-ild" firstAttribute="centerY" secondItem="5f2-e9-3xH" secondAttribute="centerY" id="9xY-O1-rh9"/>
                             <constraint firstItem="GW0-z6-amC" firstAttribute="leading" secondItem="5f2-e9-3xH" secondAttribute="leading" id="Cl5-hJ-Fet"/>
                             <constraint firstItem="Qpn-iO-Ois" firstAttribute="leading" secondItem="5f2-e9-3xH" secondAttribute="leading" constant="8" id="HzR-o4-BIB"/>
+                            <constraint firstItem="8iW-fo-ild" firstAttribute="centerX" secondItem="5f2-e9-3xH" secondAttribute="centerX" id="Icj-j5-P2a"/>
                             <constraint firstItem="5f2-e9-3xH" firstAttribute="bottom" secondItem="GW0-z6-amC" secondAttribute="bottom" id="Y1h-bg-8Ko"/>
                             <constraint firstItem="MnZ-ya-V3f" firstAttribute="top" secondItem="5f2-e9-3xH" secondAttribute="top" constant="12" id="e1l-fG-CZd"/>
                             <constraint firstItem="5f2-e9-3xH" firstAttribute="trailing" secondItem="Qpn-iO-Ois" secondAttribute="trailing" constant="8" id="fhp-5W-2dJ"/>
@@ -564,6 +573,10 @@ Sign in to start tracking your stuff!</string>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="8iW-fo-ild" id="ky1-Qb-B5o"/>
+                        <outlet property="tableView" destination="GW0-z6-amC" id="r6s-fb-Ins"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jEJ-Ma-2ey" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

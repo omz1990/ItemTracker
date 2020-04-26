@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import Firebase
 
 class LocationsTabViewController: UIViewController {
 
@@ -30,24 +29,16 @@ class LocationsTabViewController: UIViewController {
         activityIndicator.startAnimating()
         
         FirebaseClient.getLocations { (locations, error) in
+            guard let locations = locations else {
+                print("Could not find any locations")
+                return
+            }
+            
             DispatchQueue.main.async {
-                guard let locations = locations else {
-                    print("Could not find any locations")
-                    return
-                }
                 self.allLocations = locations
                 self.displayedLocations = locations
                 self.collectionView?.reloadData()
                 self.activityIndicator?.stopAnimating()
-                
-                print("FirebaseClient.getLocations closure")
-                print("Total Locations: \(locations.count)")
-                locations.forEach({ (location) in
-                    print("Total storages for location: \(location.name) : \(location.storages?.count ?? 0)")
-                    location.storages?.forEach({ (storage) in
-                        print("Total items for storage: \(storage.name) : \(storage.items?.count ?? 0)")
-                    })
-                })
             }
         }
     }
