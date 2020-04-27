@@ -47,6 +47,11 @@ class LocationsTabViewController: UIViewController {
         logout()
     }
     
+    @IBAction func addLocationTapped(_ sender: Any) {
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.AddNewViewController) as! AddNewViewController
+        vc.additionType = .location
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
 }
 
 // MARK: Extension to handle Collection View

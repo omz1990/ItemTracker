@@ -15,6 +15,7 @@ struct Constants {
     struct StoryboardId {
         static let LoginController = "LoginNavigationController"
         static let MainTabsController = "MainTabBarController"
+        static let AddNewViewController = "AddNewViewController"
     }
 
     struct Segues {
@@ -23,6 +24,8 @@ struct Constants {
     struct View {
         static let LocationCell = "locationCell"
         static let ItemRow = "itemTableRow"
+        static let TypePickerView = "typePickerView"
+        static let SubTypePickerView = "subTypePickerView"
     }
     
     struct NotificationKeys {
