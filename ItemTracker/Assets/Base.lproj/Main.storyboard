@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,15 +12,15 @@
         <!--Sign in-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SignInViewController" customModule="ItemTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="SignInViewController" customModule="ItemTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n1p-oj-U1E">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1p-oj-U1E">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8sX-aM-gGq">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8sX-aM-gGq" userLabel="Container View">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="desk" translatesAutoresizingMaskIntoConstraints="NO" id="ysF-Wf-S7e">
@@ -181,6 +181,7 @@ Sign in to start tracking your stuff!</string>
                                             <constraint firstItem="R54-tR-zol" firstAttribute="centerX" secondItem="8sX-aM-gGq" secondAttribute="centerX" id="KAu-Fm-9ZK"/>
                                             <constraint firstItem="R54-tR-zol" firstAttribute="top" secondItem="hRH-7N-vdk" secondAttribute="bottom" constant="22" id="LcH-Z3-WWA"/>
                                             <constraint firstItem="ysF-Wf-S7e" firstAttribute="top" secondItem="8sX-aM-gGq" secondAttribute="top" constant="22" id="Mt0-XU-hkn"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="NCD-sB-4fA" secondAttribute="bottom" constant="20" id="NYX-EL-Wc3"/>
                                             <constraint firstItem="PRE-fb-ZrD" firstAttribute="top" secondItem="i3x-BZ-M9Y" secondAttribute="bottom" constant="22" id="PHm-ke-4DM"/>
                                             <constraint firstItem="PRE-fb-ZrD" firstAttribute="leading" secondItem="8sX-aM-gGq" secondAttribute="leading" constant="22" id="QgC-pb-Zl9"/>
                                             <constraint firstItem="ysF-Wf-S7e" firstAttribute="centerX" secondItem="8sX-aM-gGq" secondAttribute="centerX" id="QiI-rx-vKL"/>
@@ -214,11 +215,11 @@ Sign in to start tracking your stuff!</string>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="kHQ-U7-132" firstAttribute="centerY" secondItem="n1p-oj-U1E" secondAttribute="centerY" id="6Ob-ij-aFq"/>
+                                    <constraint firstItem="8sX-aM-gGq" firstAttribute="height" secondItem="n1p-oj-U1E" secondAttribute="height" priority="250" id="EEv-Um-tGT"/>
+                                    <constraint firstItem="8sX-aM-gGq" firstAttribute="width" secondItem="n1p-oj-U1E" secondAttribute="width" id="G6S-95-WfW"/>
                                     <constraint firstItem="8sX-aM-gGq" firstAttribute="top" secondItem="n1p-oj-U1E" secondAttribute="top" id="Jjp-OY-ysh"/>
                                     <constraint firstAttribute="bottom" secondItem="8sX-aM-gGq" secondAttribute="bottom" id="NO8-QT-2Mh"/>
-                                    <constraint firstItem="8sX-aM-gGq" firstAttribute="centerY" secondItem="n1p-oj-U1E" secondAttribute="centerY" id="QKW-4T-11i"/>
                                     <constraint firstItem="kHQ-U7-132" firstAttribute="centerX" secondItem="n1p-oj-U1E" secondAttribute="centerX" id="RiH-cy-Wue"/>
-                                    <constraint firstItem="8sX-aM-gGq" firstAttribute="centerX" secondItem="n1p-oj-U1E" secondAttribute="centerX" id="WU8-tb-1gq"/>
                                     <constraint firstAttribute="trailing" secondItem="8sX-aM-gGq" secondAttribute="trailing" id="Ws2-UU-8Ny"/>
                                     <constraint firstItem="8sX-aM-gGq" firstAttribute="leading" secondItem="n1p-oj-U1E" secondAttribute="leading" id="eAX-9X-BAZ"/>
                                 </constraints>
@@ -245,7 +246,7 @@ Sign in to start tracking your stuff!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="93" y="139"/>
+            <point key="canvasLocation" x="92.753623188405811" y="138.61607142857142"/>
         </scene>
         <!--Locations-->
         <scene sceneID="Npm-XI-FM0">
@@ -931,6 +932,7 @@ Sign in to start tracking your stuff!</string>
                                             <constraint firstAttribute="trailing" secondItem="mHB-pq-OSe" secondAttribute="trailing" constant="36" id="hXV-Ta-aYE"/>
                                             <constraint firstItem="cW0-vu-a3u" firstAttribute="centerX" secondItem="Hpx-vN-IMz" secondAttribute="centerX" id="iMX-pQ-ngJ"/>
                                             <constraint firstAttribute="trailing" secondItem="cW0-vu-a3u" secondAttribute="trailing" constant="40" id="jwc-U5-ADS"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="e2g-7u-3Xk" secondAttribute="bottom" constant="20" id="nb1-GJ-sea"/>
                                             <constraint firstItem="49h-aW-xAt" firstAttribute="top" secondItem="Hpx-vN-IMz" secondAttribute="top" constant="22" id="ndF-hE-FGF"/>
                                             <constraint firstItem="1P5-pW-G6K" firstAttribute="leading" secondItem="Hpx-vN-IMz" secondAttribute="leading" constant="36" id="pT1-Qk-h20"/>
                                             <constraint firstAttribute="trailing" secondItem="SVs-8x-Q8z" secondAttribute="trailing" constant="36" id="qXY-o5-QiK"/>
@@ -954,8 +956,10 @@ Sign in to start tracking your stuff!</string>
                                     </activityIndicatorView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="Hpx-vN-IMz" firstAttribute="height" secondItem="qXT-c8-CxD" secondAttribute="height" id="C95-ro-9hU"/>
                                     <constraint firstItem="Hpx-vN-IMz" firstAttribute="leading" secondItem="qXT-c8-CxD" secondAttribute="leading" id="R94-Xz-1L4"/>
                                     <constraint firstItem="Hpx-vN-IMz" firstAttribute="centerX" secondItem="qXT-c8-CxD" secondAttribute="centerX" id="Ue4-bY-ocm"/>
+                                    <constraint firstItem="Hpx-vN-IMz" firstAttribute="width" secondItem="qXT-c8-CxD" secondAttribute="width" id="Vt9-Zb-4hl"/>
                                     <constraint firstItem="Hpx-vN-IMz" firstAttribute="centerY" secondItem="qXT-c8-CxD" secondAttribute="centerY" id="fP9-hq-FlA"/>
                                     <constraint firstAttribute="bottom" secondItem="Hpx-vN-IMz" secondAttribute="bottom" id="lED-UZ-HXB"/>
                                     <constraint firstAttribute="trailing" secondItem="Hpx-vN-IMz" secondAttribute="trailing" id="oCs-dd-LMx"/>
