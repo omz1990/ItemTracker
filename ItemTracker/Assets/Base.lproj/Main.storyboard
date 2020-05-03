@@ -686,7 +686,7 @@ Sign in to start tracking your stuff!</string>
                                             <constraint firstItem="gWk-UV-I1P" firstAttribute="leading" secondItem="Nik-wr-37M" secondAttribute="leading" constant="36" id="Qrb-hN-vwp"/>
                                             <constraint firstAttribute="trailing" secondItem="gWk-UV-I1P" secondAttribute="trailing" constant="36" id="hRz-Aj-C8u"/>
                                             <constraint firstItem="8I4-JI-lxL" firstAttribute="top" secondItem="BP8-YS-ciI" secondAttribute="bottom" constant="10" id="hmZ-bo-IoC"/>
-                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="gWk-UV-I1P" secondAttribute="bottom" constant="80" id="hxO-pU-dBS"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="gWk-UV-I1P" secondAttribute="bottom" constant="30" id="hxO-pU-dBS"/>
                                             <constraint firstAttribute="trailing" secondItem="8I4-JI-lxL" secondAttribute="trailing" constant="36" id="idJ-nH-CkI"/>
                                             <constraint firstItem="BP8-YS-ciI" firstAttribute="centerX" secondItem="Nik-wr-37M" secondAttribute="centerX" id="m44-uc-iLD"/>
                                             <constraint firstItem="ajs-fq-qMU" firstAttribute="centerX" secondItem="Nik-wr-37M" secondAttribute="centerX" id="pk2-hC-GP1"/>

@@ -74,10 +74,34 @@ class AddNewViewController: UIViewController {
     @IBAction func createButtonTapped(_ sender: Any) {
         // Create
         if validateTextFields() {
+            activityIndicator?.startAnimating()
+            
+            switch additionType {
+                case .location: createLocation()
+                default: createLocation()
+            }
             
         } else {
             showAlert(title: Constants.ErrorMessage.incompleteFieldsTile, message: Constants.ErrorMessage.incompleteFieldsBody)
         }
+    }
+    
+    private func createLocation() {
+        FirebaseClient.createLocation(location: getLocationObject()) { (success) in
+            DispatchQueue.main.async {
+                self.activityIndicator?.stopAnimating()
+                
+                if success {
+                    print("Creation successful")
+                } else {
+                    print("Creation failed")
+                }
+            }
+        }
+    }
+    
+    private func getLocationObject() -> Location {
+        return Location(id: "unknown", name: nameTextField?.text ?? "", subName: subNameTextField?.text ?? "", description: descriptionTextField?.text ?? "", imageUrl: "", type: "Other", subType: "Other", tags: [], createdAt: Date(), updatedAt: Date(), storages: nil)
     }
     
     private func validateTextFields() -> Bool {

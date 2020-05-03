@@ -112,7 +112,24 @@ class FirebaseClient {
         }
     }
     
-    // MARK: Mappers to parse Firebase Dictionary Objects into local Structs
+    // MARK: Create data in Firebase
+    class func createLocation(location: Location, completion: @escaping (Bool) -> Void) {
+        if let uid = Auth.auth().currentUser?.uid {
+            let dbRef = Database.database().reference()
+            
+            let path = DatabaseCollection.location(uid: uid).path
+            let fieldsDictionary = mapLocationStructToDictionary(location: location)
+            print("fieldsDictionary: \(fieldsDictionary)")
+            
+            dbRef.child(path).childByAutoId().setValue(fieldsDictionary) { (error, ref) in
+                completion(error == nil)
+            }
+        } else {
+            completion(false)
+        }
+    }
+    
+    // MARK: Mappers to parse Firebase Dictionary Objects into local Structs and vice versa
     private class func mapLocationDictionaryToStruct(_ locationId: String, _ locationObject: AnyObject) -> Location {
         let name: String = locationObject.value(forKey: DatabaseField.Common.name) as? String ?? ""
         let subName: String? = locationObject.value(forKey: DatabaseField.Location.subName) as? String
@@ -122,11 +139,26 @@ class FirebaseClient {
         let subType: String = locationObject.value(forKey: DatabaseField.Location.subType) as? String ?? ""
         let tags: [String]? = locationObject.value(forKey: DatabaseField.Common.tags) as? [String]
         let createdAtTimestamp: Double = locationObject.value(forKey: DatabaseField.Common.createdAt) as? Double ?? 0
-        let createdAt: Date = Date(timeIntervalSince1970: createdAtTimestamp)
+        let createdAt: Date = Date(timeIntervalSince1970: createdAtTimestamp/1000)
         let updatedAtTimestamp: Double = locationObject.value(forKey: DatabaseField.Common.updatedAt) as? Double ?? 0
-        let updatedAt: Date = Date(timeIntervalSince1970: updatedAtTimestamp)
+        let updatedAt: Date = Date(timeIntervalSince1970: updatedAtTimestamp/1000)
         
         return Location(id: locationId, name: name, subName: subName, description: description, imageUrl: imageUrl, type: type, subType: subType, tags: tags, createdAt: createdAt, updatedAt: updatedAt, storages: nil)
+    }
+    
+    private class func mapLocationStructToDictionary(location: Location) -> [String: Any] {
+        var dictionary = [String: Any]()
+        dictionary[DatabaseField.Common.name] = location.name
+        dictionary[DatabaseField.Location.subName] = location.subName
+        dictionary[DatabaseField.Common.description] = location.description
+        dictionary[DatabaseField.Common.imageUrl] = location.imageUrl ?? ""
+        dictionary[DatabaseField.Common.type] = location.type
+        dictionary[DatabaseField.Location.subType] = location.subType
+        dictionary[DatabaseField.Common.tags] = location.tags ?? []
+        dictionary[DatabaseField.Common.createdAt] = location.createdAt.currentTimeMillis()
+        dictionary[DatabaseField.Common.updatedAt] = location.updatedAt.currentTimeMillis()
+        
+        return dictionary
     }
     
     private class func mapStorageDictionaryToStruct(_ storageId: String, _ storageObject: AnyObject) -> Storage {
@@ -137,9 +169,9 @@ class FirebaseClient {
         let type: String = storageObject.value(forKey: DatabaseField.Common.type) as? String ?? ""
         let tags: [String]? = storageObject.value(forKey: DatabaseField.Common.tags) as? [String]
         let createdAtTimestamp: Double = storageObject.value(forKey: DatabaseField.Common.createdAt) as? Double ?? 0
-        let createdAt: Date = Date(timeIntervalSince1970: createdAtTimestamp)
+        let createdAt: Date = Date(timeIntervalSince1970: createdAtTimestamp/1000)
         let updatedAtTimestamp: Double = storageObject.value(forKey: DatabaseField.Common.updatedAt) as? Double ?? 0
-        let updatedAt: Date = Date(timeIntervalSince1970: updatedAtTimestamp)
+        let updatedAt: Date = Date(timeIntervalSince1970: updatedAtTimestamp/1000)
         
         return Storage(id: storageId, locationId: locationId, name: name, description: description, imageUrl: imageUrl, type: type, tags: tags, createdAt: createdAt, updatedAt: updatedAt, items: nil)
     }
@@ -153,9 +185,9 @@ class FirebaseClient {
         let type: String = itemObject.value(forKey: DatabaseField.Common.type) as? String ?? ""
         let tags: [String]? = itemObject.value(forKey: DatabaseField.Common.tags) as? [String]
         let createdAtTimestamp: Double = itemObject.value(forKey: DatabaseField.Common.createdAt) as? Double ?? 0
-        let createdAt: Date = Date(timeIntervalSince1970: createdAtTimestamp)
+        let createdAt: Date = Date(timeIntervalSince1970: createdAtTimestamp/1000)
         let updatedAtTimestamp: Double = itemObject.value(forKey: DatabaseField.Common.updatedAt) as? Double ?? 0
-        let updatedAt: Date = Date(timeIntervalSince1970: updatedAtTimestamp)
+        let updatedAt: Date = Date(timeIntervalSince1970: updatedAtTimestamp/1000)
 
         return Item(id: itemId, storageId: storageId, storageName: nil, locationId: locationId, locationName: nil, name: name, description: description, imageUrl: imageUrl, type: type, tags: tags, createdAt: createdAt, updatedAt: updatedAt)
     }
