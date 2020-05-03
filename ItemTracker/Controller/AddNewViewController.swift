@@ -15,9 +15,12 @@ class AddNewViewController: UIViewController {
     @IBOutlet weak var topImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var nameBottomBorder: UIView!
     @IBOutlet weak var subNameContainerView: UIView!
     @IBOutlet weak var subNameTextField: UITextField!
+    @IBOutlet weak var subNameBottomBorder: UIView!
     @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet weak var descriptionBottomBorder: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var albumButtom: UIButton!
@@ -30,6 +33,19 @@ class AddNewViewController: UIViewController {
     
     private var imageFilePath: String?
     private var imageFileUrl: URL?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Subscribe to keyboard events
+        subscribeToKeyboardWillShowNotifications()
+        subscribeToKeyboardWillHideNotifications()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        // Unsubscribe keyboard events
+        unsubscribeFromKeyboardWillShowNotifications()
+        unsubscribeFromKeyboardWillHideNotifications()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +67,39 @@ class AddNewViewController: UIViewController {
     
     @IBAction func createButtonTapped(_ sender: Any) {
         // Create
+        validateTextFields()
+    }
+    
+    private func validateTextFields() -> Bool {
+        let errorColor: UIColor = .red
+        let validColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+        var valid = true
+        
+        // Name field is required for all addition types
+        if nameTextField.text?.isEmpty == true {
+            nameBottomBorder.backgroundColor = errorColor
+            valid = false
+        } else {
+            nameBottomBorder.backgroundColor = validColor
+        }
+        
+        // Description field is required for all addition types
+        if descriptionTextField.text?.isEmpty == true {
+            descriptionBottomBorder.backgroundColor = errorColor
+            valid = false
+        } else {
+            descriptionBottomBorder.backgroundColor = validColor
+        }
+        
+        // Sub name is only required for Location addition type
+        if (additionType == AdditionType.location && subNameTextField.text?.isEmpty == true) {
+            subNameBottomBorder.backgroundColor = errorColor
+            valid = false
+        } else {
+            subNameBottomBorder.backgroundColor = validColor
+        }
+        
+        return valid
     }
 }
 

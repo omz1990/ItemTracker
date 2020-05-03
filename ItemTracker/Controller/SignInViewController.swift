@@ -29,6 +29,18 @@ class SignInViewController: UIViewController {
         } else {
             initGoogleSignInListener()
         }
+        
+        // Subscribe to keyboard events
+        subscribeToKeyboardWillShowNotifications()
+        subscribeToKeyboardWillHideNotifications()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Unsubscribe keyboard events
+        unsubscribeFromKeyboardWillShowNotifications()
+        unsubscribeFromKeyboardWillHideNotifications()
     }
     
     override func viewDidLoad() {

@@ -686,7 +686,7 @@ Sign in to start tracking your stuff!</string>
                                             <constraint firstItem="gWk-UV-I1P" firstAttribute="leading" secondItem="Nik-wr-37M" secondAttribute="leading" constant="36" id="Qrb-hN-vwp"/>
                                             <constraint firstAttribute="trailing" secondItem="gWk-UV-I1P" secondAttribute="trailing" constant="36" id="hRz-Aj-C8u"/>
                                             <constraint firstItem="8I4-JI-lxL" firstAttribute="top" secondItem="BP8-YS-ciI" secondAttribute="bottom" constant="10" id="hmZ-bo-IoC"/>
-                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="gWk-UV-I1P" secondAttribute="bottom" constant="30" id="hxO-pU-dBS"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="gWk-UV-I1P" secondAttribute="bottom" constant="80" id="hxO-pU-dBS"/>
                                             <constraint firstAttribute="trailing" secondItem="8I4-JI-lxL" secondAttribute="trailing" constant="36" id="idJ-nH-CkI"/>
                                             <constraint firstItem="BP8-YS-ciI" firstAttribute="centerX" secondItem="Nik-wr-37M" secondAttribute="centerX" id="m44-uc-iLD"/>
                                             <constraint firstItem="ajs-fq-qMU" firstAttribute="centerX" secondItem="Nik-wr-37M" secondAttribute="centerX" id="pk2-hC-GP1"/>
@@ -719,9 +719,12 @@ Sign in to start tracking your stuff!</string>
                         <outlet property="albumButtom" destination="qsF-Yi-YVF" id="wJP-8e-0PK"/>
                         <outlet property="cameraButton" destination="1PB-jy-nH7" id="554-fd-jsn"/>
                         <outlet property="createButton" destination="gWk-UV-I1P" id="gAd-Cc-4aX"/>
+                        <outlet property="descriptionBottomBorder" destination="MKt-Ps-dWN" id="z2U-zm-4xF"/>
                         <outlet property="descriptionTextField" destination="JaW-L5-ouG" id="wpb-wK-nhk"/>
                         <outlet property="imageView" destination="xwT-nD-0Lz" id="mtm-7t-ar0"/>
+                        <outlet property="nameBottomBorder" destination="gBt-8c-hGp" id="QNa-Le-g22"/>
                         <outlet property="nameTextField" destination="u67-ah-ZCu" id="vOa-dx-apB"/>
+                        <outlet property="subNameBottomBorder" destination="Wbk-db-D8y" id="5DZ-iy-nNv"/>
                         <outlet property="subNameContainerView" destination="zTB-l5-tdQ" id="1hT-Ee-yJZ"/>
                         <outlet property="subNameTextField" destination="nBz-7I-8xG" id="1O8-2Z-tH2"/>
                         <outlet property="titleLabel" destination="BP8-YS-ciI" id="pYJ-Q8-3WP"/>

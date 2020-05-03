@@ -9,6 +9,22 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Subscribe to keyboard events
+        subscribeToKeyboardWillShowNotifications()
+        subscribeToKeyboardWillHideNotifications()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Unsubscribe keyboard events
+        unsubscribeFromKeyboardWillShowNotifications()
+        unsubscribeFromKeyboardWillHideNotifications()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
