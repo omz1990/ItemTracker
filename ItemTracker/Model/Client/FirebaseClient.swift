@@ -119,7 +119,39 @@ class FirebaseClient {
             
             let path = DatabaseCollection.location(uid: uid).path
             let fieldsDictionary = mapLocationStructToDictionary(location: location)
-            print("fieldsDictionary: \(fieldsDictionary)")
+            print("Locations fields to add: \(fieldsDictionary)")
+            
+            dbRef.child(path).childByAutoId().setValue(fieldsDictionary) { (error, ref) in
+                completion(error == nil)
+            }
+        } else {
+            completion(false)
+        }
+    }
+    
+    class func createStorage(storage: Storage, completion: @escaping (Bool) -> Void) {
+        if let uid = Auth.auth().currentUser?.uid {
+            let dbRef = Database.database().reference()
+            
+            let path = "\(DatabaseCollection.storage(uid: uid).path)/\(storage.locationId)"
+            let fieldsDictionary = mapStorageStructToDictionary(storage: storage)
+            print("Storage fields to add: \(fieldsDictionary)")
+            
+            dbRef.child(path).childByAutoId().setValue(fieldsDictionary) { (error, ref) in
+                completion(error == nil)
+            }
+        } else {
+            completion(false)
+        }
+    }
+    
+    class func createItem(item: Item, completion: @escaping (Bool) -> Void) {
+        if let uid = Auth.auth().currentUser?.uid {
+            let dbRef = Database.database().reference()
+            
+            let path = "\(DatabaseCollection.item(uid: uid).path)/\(item.locationId)/\(item.storageId)"
+            let fieldsDictionary = mapItemStructToDictionary(item: item)
+            print("Item fields to add: \(fieldsDictionary)")
             
             dbRef.child(path).childByAutoId().setValue(fieldsDictionary) { (error, ref) in
                 completion(error == nil)
@@ -176,6 +208,19 @@ class FirebaseClient {
         return Storage(id: storageId, locationId: locationId, name: name, description: description, imageUrl: imageUrl, type: type, tags: tags, createdAt: createdAt, updatedAt: updatedAt, items: nil)
     }
     
+    private class func mapStorageStructToDictionary(storage: Storage) -> [String: Any] {
+        var dictionary = [String: Any]()
+        dictionary[DatabaseField.Common.name] = storage.name
+        dictionary[DatabaseField.Common.description] = storage.description
+        dictionary[DatabaseField.Common.imageUrl] = storage.imageUrl ?? ""
+        dictionary[DatabaseField.Common.type] = storage.type
+        dictionary[DatabaseField.Common.tags] = storage.tags ?? []
+        dictionary[DatabaseField.Common.createdAt] = storage.createdAt.currentTimeMillis()
+        dictionary[DatabaseField.Common.updatedAt] = storage.updatedAt.currentTimeMillis()
+        
+        return dictionary
+    }
+    
     private class func mapItemDictionaryToStruct(_ itemId: String, _ itemObject: AnyObject) -> Item {
         let storageId: String = itemObject.value(forKey: DatabaseField.Common.storageId) as? String ?? ""
         let locationId: String = itemObject.value(forKey: DatabaseField.Common.locationId) as? String ?? ""
@@ -190,6 +235,19 @@ class FirebaseClient {
         let updatedAt: Date = Date(timeIntervalSince1970: updatedAtTimestamp/1000)
 
         return Item(id: itemId, storageId: storageId, storageName: nil, locationId: locationId, locationName: nil, name: name, description: description, imageUrl: imageUrl, type: type, tags: tags, createdAt: createdAt, updatedAt: updatedAt)
+    }
+    
+    private class func mapItemStructToDictionary(item: Item) -> [String: Any] {
+        var dictionary = [String: Any]()
+        dictionary[DatabaseField.Common.name] = item.name
+        dictionary[DatabaseField.Common.description] = item.description
+        dictionary[DatabaseField.Common.imageUrl] = item.imageUrl ?? ""
+        dictionary[DatabaseField.Common.type] = item.type
+        dictionary[DatabaseField.Common.tags] = item.tags ?? []
+        dictionary[DatabaseField.Common.createdAt] = item.createdAt.currentTimeMillis()
+        dictionary[DatabaseField.Common.updatedAt] = item.updatedAt.currentTimeMillis()
+        
+        return dictionary
     }
     
     // MARK: Database Collections and Field name Constants
