@@ -12,6 +12,8 @@ import Firebase
 
 class AddNewViewController: UIViewController {
 
+    @IBOutlet weak var topImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var subNameContainerView: UIView!
     @IBOutlet weak var subNameTextField: UITextField!
@@ -19,6 +21,8 @@ class AddNewViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var albumButtom: UIButton!
+    @IBOutlet weak var createButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var additionType: AdditionType!
     var location: Location!
@@ -26,10 +30,6 @@ class AddNewViewController: UIViewController {
     
     private var imageFilePath: String?
     private var imageFileUrl: URL?
-    
-    let locationTypes = ["Building", "Shop", "House", "Floor", "Other"]
-    let locationSubTypes = ["Room", "Garage", "Kitchen", "Bathroom", "Store room", "Balcony", "Back yard", "Other"]
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ class AddNewViewController: UIViewController {
     
     
     @IBAction func cameraButtonTapped(_ sender: Any) {
-
+        // Open camera and add picture
     }
     
     @IBAction func albumButtonTapped(_ sender: Any) {
@@ -47,6 +47,10 @@ class AddNewViewController: UIViewController {
         picker.delegate = self
         picker.sourceType = UIImagePickerController.SourceType.photoLibrary
         present(picker, animated: true, completion:nil)
+    }
+    
+    @IBAction func createButtonTapped(_ sender: Any) {
+        // Create
     }
 }
 
