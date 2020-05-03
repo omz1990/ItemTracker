@@ -21,6 +21,19 @@ extension UIViewController {
         present(secondVC, animated: true, completion: nil)
     }
     
+    func showAlert(title: String, message: String) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertVC, animated: true)
+    }
+    
+    func pickAnImage(sourceType: UIImagePickerController.SourceType, delegate: UIImagePickerControllerDelegate & UINavigationControllerDelegate) {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = delegate
+        imagePickerController.sourceType = sourceType
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
     func logout() {
         let firebaseAuth = Auth.auth()
         do {

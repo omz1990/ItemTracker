@@ -55,14 +55,16 @@ class AddNewViewController: UIViewController {
     
     
     @IBAction func cameraButtonTapped(_ sender: Any) {
-        // Open camera and add picture
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            pickAnImage(sourceType: .camera, delegate: self)
+        } else {
+            showAlert(title: "Error", message: "Camera source not available!")
+        }
+        
     }
     
     @IBAction func albumButtonTapped(_ sender: Any) {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.sourceType = UIImagePickerController.SourceType.photoLibrary
-        present(picker, animated: true, completion:nil)
+        pickAnImage(sourceType: .photoLibrary, delegate: self)
     }
     
     @IBAction func createButtonTapped(_ sender: Any) {
