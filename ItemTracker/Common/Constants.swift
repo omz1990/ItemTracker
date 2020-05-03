@@ -38,4 +38,9 @@ struct Constants {
         static let photoURL = "photoUrl"
         static let imageURL = "imageUrl"
     }
+    
+    struct ErrorMessage {
+        static let incompleteFieldsTile = "Incomplete fields"
+        static let incompleteFieldsBody = "Please fill out all required fields underlined as red!"
+    }
 }

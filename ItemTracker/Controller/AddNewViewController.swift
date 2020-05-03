@@ -39,6 +39,10 @@ class AddNewViewController: UIViewController {
         // Subscribe to keyboard events
         subscribeToKeyboardWillShowNotifications()
         subscribeToKeyboardWillHideNotifications()
+        
+        if additionType != AdditionType.location {
+            subNameContainerView.isHidden = true
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -69,7 +73,11 @@ class AddNewViewController: UIViewController {
     
     @IBAction func createButtonTapped(_ sender: Any) {
         // Create
-        validateTextFields()
+        if validateTextFields() {
+            
+        } else {
+            showAlert(title: Constants.ErrorMessage.incompleteFieldsTile, message: Constants.ErrorMessage.incompleteFieldsBody)
+        }
     }
     
     private func validateTextFields() -> Bool {
