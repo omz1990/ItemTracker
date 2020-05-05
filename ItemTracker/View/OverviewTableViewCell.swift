@@ -24,7 +24,7 @@ class OverviewTableViewCell: UITableViewCell {
         line1Label.attributedText = aggregateTitleAndBody(title: line1Title, body: line1Body)
         line2Label.attributedText = aggregateTitleAndBody(title: line2Title, body: line2Body)
         if let image = image {
-            imageView?.image = image
+            itemImageView?.image = image
         }
     }
     

@@ -45,4 +45,10 @@ struct Constants {
         static let incompleteFieldsTile = "Incomplete fields"
         static let incompleteFieldsBody = "Please fill out all required fields underlined as red!"
     }
+    
+    struct Image {
+        static let locationPlaceholder = "locationPlaceholder"
+        static let storagePlaceholder = "storagePlaceholder"
+        static let itemPlaceholder = "itemBoxPlaceholder"
+    }
 }

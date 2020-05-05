@@ -26,6 +26,9 @@ class SelectViewController: UIViewController {
     var allItems: [Item] = []
     var displayedItems: [Item] = []
     
+    let locationIcon = UIImage(named: Constants.Image.locationPlaceholder)
+    let storageIcon = UIImage(named: Constants.Image.storagePlaceholder)
+    let itemIcon = UIImage(named: Constants.Image.itemPlaceholder)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +37,17 @@ class SelectViewController: UIViewController {
 
         let nibName = UINib(nibName: Constants.View.OverviewTableView, bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: Constants.View.ItemRow)
+        
+        if selectionType == SelectionType.location {
+            titleLabel.text = "Select Location"
+            topImageView.image = locationIcon
+        } else if selectionType == SelectionType.storage {
+            titleLabel.text = "Select Storage"
+            topImageView.image = storageIcon
+        } else if selectionType == SelectionType.item {
+            titleLabel.text = "Select Item"
+            topImageView.image = itemIcon
+        }
     }
     
 }
@@ -58,6 +72,30 @@ extension SelectViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if selectionType == SelectionType.location {
+            // Open storages
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.SelectViewController) as! SelectViewController
+            vc.selectionType = .storage
+            let storages = displayedLocations[indexPath.row].storages
+            vc.allStorages = storages ?? []
+            vc.displayedStorages = storages ?? []
+            self.navigationController!.pushViewController(vc, animated: true)
+            
+        } else if selectionType == SelectionType.storage {
+            // Open items list
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.SelectViewController) as! SelectViewController
+            vc.selectionType = .item
+            let items = displayedStorages[indexPath.row].items
+            vc.allItems = items ?? []
+            vc.displayedItems = items ?? []
+            self.navigationController!.pushViewController(vc, animated: true)
+        } else if selectionType == SelectionType.item {
+            // TODO: Open item details
+            print("Open item details")
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var location: Location? = nil
         var storage: Storage? = nil
@@ -77,7 +115,7 @@ extension SelectViewController: UITableViewDataSource, UITableViewDelegate {
         let line1Body = getLineOneBody(location: location, storage: storage, item: item)
         let line2Body = getLineTwoBody(location: location, storage: storage, item: item)
         
-        cell.initCell(heading: title, line1Title: getLineOneTitle(), line1Body: line1Body, line2Title: getLineTwoTitle(), line2Body: line2Body, image: nil)
+        cell.initCell(heading: title, line1Title: getLineOneTitle(), line1Body: line1Body, line2Title: getLineTwoTitle(), line2Body: line2Body, image: getThumbnail())
         
         return cell
     }
@@ -137,12 +175,24 @@ extension SelectViewController: UITableViewDataSource, UITableViewDelegate {
             case .storage:
                 return "\(storage?.items?.count ?? 0)"
             case .item:
-                return item?.locationName ?? ""
+                return item?.storageName ?? ""
             default:
                 return nil
         }
     }
     
+    private func getThumbnail() -> UIImage? {
+        switch selectionType {
+            case .location:
+                return locationIcon
+            case .storage:
+                return storageIcon
+            case .item:
+                return itemIcon
+            default:
+                return nil
+        }
+    }
 }
 
 // MARK: Extension to handle Search bar
