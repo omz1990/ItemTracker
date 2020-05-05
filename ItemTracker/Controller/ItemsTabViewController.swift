@@ -20,6 +20,9 @@ class ItemsTabViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let nibName = UINib(nibName: Constants.View.OverviewTableView, bundle: nil)
+        tableView.register(nibName, forCellReuseIdentifier: Constants.View.ItemRow)
 
         FirebaseClient.getLocations { (locations, error) in
             guard let locations = locations else {
@@ -72,10 +75,9 @@ extension ItemsTabViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = displayedItems[indexPath.row]
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.View.ItemRow) as! ItemTableViewCell
-        cell.titleTextView.text = item.name
-        cell.locationTextView.text = item.locationName
-        cell.storageTextView.text = item.storageName
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.View.ItemRow) as!
+        OverviewTableViewCell
+        cell.initCell(heading: item.name, line1Title: "Location", line1Body: item.locationName, line2Title: "Storage", line2Body: item.storageName, image: nil)
         return cell
     }
     

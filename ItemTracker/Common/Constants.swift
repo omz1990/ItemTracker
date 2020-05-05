@@ -26,6 +26,7 @@ struct Constants {
         static let ItemRow = "itemTableRow"
         static let TypePickerView = "typePickerView"
         static let SubTypePickerView = "subTypePickerView"
+        static let OverviewTableView = "OverviewTableViewCell"
     }
     
     struct NotificationKeys {
