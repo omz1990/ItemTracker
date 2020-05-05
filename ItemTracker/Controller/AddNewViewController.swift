@@ -27,7 +27,7 @@ class AddNewViewController: UIViewController {
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var additionType: AdditionType!
+    var selectionType: SelectionType!
     var location: Location!
     var storage: Storage!
     
@@ -40,7 +40,7 @@ class AddNewViewController: UIViewController {
         subscribeToKeyboardWillShowNotifications()
         subscribeToKeyboardWillHideNotifications()
         
-        if additionType != AdditionType.location {
+        if selectionType != SelectionType.location {
             subNameContainerView.isHidden = true
         }
     }
@@ -54,7 +54,7 @@ class AddNewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        additionType = additionType ?? .location
+        selectionType = selectionType ?? .location
     }
     
     
@@ -76,7 +76,7 @@ class AddNewViewController: UIViewController {
         if validateTextFields() {
             activityIndicator?.startAnimating()
             
-            switch additionType {
+            switch selectionType {
                 case .location: createLocation()
                 default: createLocation()
             }
@@ -126,7 +126,7 @@ class AddNewViewController: UIViewController {
         }
         
         // Sub name is only required for Location addition type
-        if (additionType == AdditionType.location && subNameTextField.text?.isEmpty == true) {
+        if (selectionType == SelectionType.location && subNameTextField.text?.isEmpty == true) {
             subNameBottomBorder.backgroundColor = errorColor
             valid = false
         } else {
@@ -171,15 +171,5 @@ extension AddNewViewController: UIImagePickerControllerDelegate, UINavigationCon
 
     private func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
         return input.rawValue
-    }
-}
-
-// MARK: Helpers
-extension AddNewViewController {
-    
-    enum AdditionType {
-        case location
-        case storage
-        case item
     }
 }

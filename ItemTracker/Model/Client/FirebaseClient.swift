@@ -33,7 +33,15 @@ class FirebaseClient {
                             return
                         }
                         
-                        mappedLocations[locationIndex].storages = storages
+                        // Add the Location names for convenience here to reduce future parsing
+                        let storagesWithLocationNames: [Storage]? = storages.map({ (storage) -> Storage in
+                            var newStorage = storage
+                            newStorage.locationName = location.getDisplayName()
+                            return newStorage
+                        })
+                        
+                        
+                        mappedLocations[locationIndex].storages = storagesWithLocationNames
                         
                         if (storages.isEmpty) {
                             completion(mappedLocations, error)
@@ -205,7 +213,7 @@ class FirebaseClient {
         let updatedAtTimestamp: Double = storageObject.value(forKey: DatabaseField.Common.updatedAt) as? Double ?? 0
         let updatedAt: Date = Date(timeIntervalSince1970: updatedAtTimestamp/1000)
         
-        return Storage(id: storageId, locationId: locationId, name: name, description: description, imageUrl: imageUrl, type: type, tags: tags, createdAt: createdAt, updatedAt: updatedAt, items: nil)
+        return Storage(id: storageId, locationId: locationId, locationName: nil, name: name, description: description, imageUrl: imageUrl, type: type, tags: tags, createdAt: createdAt, updatedAt: updatedAt, items: nil)
     }
     
     private class func mapStorageStructToDictionary(storage: Storage) -> [String: Any] {

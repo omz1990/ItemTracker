@@ -59,6 +59,14 @@ class ItemsTabViewController: UIViewController {
     @IBAction func logoutTapped(_ sender: Any) {
         logout()
     }
+    
+    @IBAction func addItemTapped(_ sender: Any) {
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.SelectViewController) as! SelectViewController
+        vc.selectionType = .location
+        vc.allLocations = allLocations
+        vc.displayedLocations = allLocations
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
 }
 
 // MARK: Extension to handle Table View
@@ -75,8 +83,7 @@ extension ItemsTabViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = displayedItems[indexPath.row]
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.View.ItemRow) as!
-        OverviewTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.View.ItemRow) as! OverviewTableViewCell
         cell.initCell(heading: item.name, line1Title: "Location", line1Body: item.locationName, line2Title: "Storage", line2Body: item.storageName, image: nil)
         return cell
     }

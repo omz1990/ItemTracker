@@ -14,6 +14,8 @@
 		56210FD8245F1E1B008F3F28 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56210FD7245F1E1A008F3F28 /* Date+Extension.swift */; };
 		56261F3C2461A150007EC86E /* OverviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56261F3A2461A150007EC86E /* OverviewTableViewCell.swift */; };
 		56261F3D2461A150007EC86E /* OverviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56261F3B2461A150007EC86E /* OverviewTableViewCell.xib */; };
+		56261F3F2461B96F007EC86E /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56261F3E2461B96F007EC86E /* SelectViewController.swift */; };
+		56261F412461B9E8007EC86E /* SelectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56261F402461B9E8007EC86E /* SelectionType.swift */; };
 		563191D5243C6C4A003E47C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563191D4243C6C4A003E47C5 /* AppDelegate.swift */; };
 		563191D7243C6C4A003E47C5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563191D6243C6C4A003E47C5 /* SceneDelegate.swift */; };
 		563191DC243C6C4A003E47C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 563191DA243C6C4A003E47C5 /* Main.storyboard */; };
@@ -43,6 +45,8 @@
 		56210FD7245F1E1A008F3F28 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		56261F3A2461A150007EC86E /* OverviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewTableViewCell.swift; sourceTree = "<group>"; };
 		56261F3B2461A150007EC86E /* OverviewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OverviewTableViewCell.xib; sourceTree = "<group>"; };
+		56261F3E2461B96F007EC86E /* SelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewController.swift; sourceTree = "<group>"; };
+		56261F402461B9E8007EC86E /* SelectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionType.swift; sourceTree = "<group>"; };
 		563191D1243C6C4A003E47C5 /* ItemTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ItemTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		563191D4243C6C4A003E47C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		563191D6243C6C4A003E47C5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +177,7 @@
 				56BBF9982448CE4F0070D250 /* LocationsTabViewController.swift */,
 				56BBF99A2448CE620070D250 /* ItemsTabViewController.swift */,
 				56069C3F2455E0A9003F6125 /* AddNewViewController.swift */,
+				56261F3E2461B96F007EC86E /* SelectViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 				56BBF99424489EFA0070D250 /* Constants.swift */,
 				56069C3B2454A02D003F6125 /* String+Extension.swift */,
 				56210FD7245F1E1A008F3F28 /* Date+Extension.swift */,
+				56261F402461B9E8007EC86E /* SelectionType.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -369,11 +375,13 @@
 				56BBF9932448876A0070D250 /* SignUpViewController.swift in Sources */,
 				56BBF991244887220070D250 /* SignInViewController.swift in Sources */,
 				563191D5243C6C4A003E47C5 /* AppDelegate.swift in Sources */,
+				56261F3F2461B96F007EC86E /* SelectViewController.swift in Sources */,
 				56BBF99524489EFA0070D250 /* Constants.swift in Sources */,
 				5633F97F244B3AC40076B476 /* Item.swift in Sources */,
 				5633F97A244A2E820076B476 /* FirebaseClient.swift in Sources */,
 				56BBF98F2448804A0070D250 /* UIButton+Extension.swift in Sources */,
 				56069C402455E0A9003F6125 /* AddNewViewController.swift in Sources */,
+				56261F412461B9E8007EC86E /* SelectionType.swift in Sources */,
 				563191D7243C6C4A003E47C5 /* SceneDelegate.swift in Sources */,
 				5633F97D244B3A870076B476 /* Location.swift in Sources */,
 				56069C3E2454B1B0003F6125 /* ItemTableViewCell.swift in Sources */,
