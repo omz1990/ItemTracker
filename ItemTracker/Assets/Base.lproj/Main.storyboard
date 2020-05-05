@@ -786,7 +786,7 @@ Sign in to start tracking your stuff!</string>
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="93"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="itemPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="JPs-p1-buh">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="itemBoxPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="JPs-p1-buh">
                                                     <rect key="frame" x="16" y="20" width="48" height="53"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="fbt-CV-Da9"/>
@@ -1126,7 +1126,7 @@ Sign in to start tracking your stuff!</string>
     <resources>
         <image name="desk" width="128" height="128"/>
         <image name="google" width="128" height="128"/>
-        <image name="itemPlaceholder" width="128" height="128"/>
+        <image name="itemBoxPlaceholder" width="128" height="128"/>
         <image name="itemsTab" width="37.5" height="37.5"/>
         <image name="locationPlaceholder" width="128" height="128"/>
         <image name="locationsTab" width="21" height="37.5"/>
