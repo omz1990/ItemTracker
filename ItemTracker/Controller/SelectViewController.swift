@@ -91,8 +91,10 @@ extension SelectViewController: UITableViewDataSource, UITableViewDelegate {
             vc.displayedItems = items ?? []
             self.navigationController!.pushViewController(vc, animated: true)
         } else if selectionType == SelectionType.item {
-            // TODO: Open item details
-            print("Open item details")
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.DetailsViewController) as! DetailsViewController
+            vc.selectionType = .item
+            vc.item = displayedItems[indexPath.row]
+            self.navigationController!.pushViewController(vc, animated: true)
         }
     }
     

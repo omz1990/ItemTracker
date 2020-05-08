@@ -88,6 +88,13 @@ extension ItemsTabViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.DetailsViewController) as! DetailsViewController
+        vc.selectionType = .item
+        vc.item = displayedItems[indexPath.row]
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    
 }
 
 // MARK: Extension to handle Search bar
