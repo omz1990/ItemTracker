@@ -17,6 +17,7 @@ struct Constants {
         static let MainTabsController = "MainTabBarController"
         static let AddNewViewController = "AddNewViewController"
         static let SelectViewController = "SelectViewController"
+        static let DetailsViewController = "DetailsViewController"
     }
 
     struct Segues {
