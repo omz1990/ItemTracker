@@ -15,6 +15,7 @@ class SelectViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
+    var operationPath: OperationPath!
     var selectionType: SelectionType!
     
     var allLocations: [Location]!
@@ -33,8 +34,6 @@ class SelectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        selectionType = selectionType ?? .location
-
         let nibName = UINib(nibName: Constants.View.OverviewTableView, bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: Constants.View.ItemRow)
         
@@ -74,25 +73,46 @@ extension SelectViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if selectionType == SelectionType.location {
-            // Open storages
-            let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.SelectViewController) as! SelectViewController
-            vc.selectionType = .storage
-            let storages = displayedLocations[indexPath.row].storages
-            vc.allStorages = storages ?? []
-            vc.displayedStorages = storages ?? []
-            self.navigationController!.pushViewController(vc, animated: true)
-            
+            if operationPath == OperationPath.view {
+                // Open location details
+                let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.DetailsViewController) as! DetailsViewController
+                vc.selectionType = .location
+                vc.operationPath = operationPath
+                vc.location = displayedLocations[indexPath.row]
+                self.navigationController!.pushViewController(vc, animated: true)
+            } else if operationPath == OperationPath.add {
+                // Open storages list
+                let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.SelectViewController) as! SelectViewController
+                vc.selectionType = .storage
+                vc.operationPath = operationPath
+                let storages = displayedLocations[indexPath.row].storages
+                vc.allStorages = storages ?? []
+                vc.displayedStorages = storages ?? []
+                self.navigationController!.pushViewController(vc, animated: true)
+            }
         } else if selectionType == SelectionType.storage {
-            // Open items list
-            let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.SelectViewController) as! SelectViewController
-            vc.selectionType = .item
-            let items = displayedStorages[indexPath.row].items
-            vc.allItems = items ?? []
-            vc.displayedItems = items ?? []
-            self.navigationController!.pushViewController(vc, animated: true)
+            if operationPath == OperationPath.view {
+                // Open location details
+                let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.DetailsViewController) as! DetailsViewController
+                vc.selectionType = .storage
+                vc.operationPath = operationPath
+                vc.storage = displayedStorages[indexPath.row]
+                self.navigationController!.pushViewController(vc, animated: true)
+            } else if operationPath == OperationPath.add {
+                // Open items list
+                let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.SelectViewController) as! SelectViewController
+                vc.selectionType = .item
+                vc.operationPath = operationPath
+                let items = displayedStorages[indexPath.row].items
+                vc.allItems = items ?? []
+                vc.displayedItems = items ?? []
+                self.navigationController!.pushViewController(vc, animated: true)
+            }
         } else if selectionType == SelectionType.item {
+            // Open Item details
             let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.DetailsViewController) as! DetailsViewController
             vc.selectionType = .item
+            vc.operationPath = operationPath
             vc.item = displayedItems[indexPath.row]
             self.navigationController!.pushViewController(vc, animated: true)
         }

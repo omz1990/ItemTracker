@@ -72,6 +72,7 @@ extension LocationsTabViewController: UICollectionViewDataSource, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.DetailsViewController) as! DetailsViewController
         vc.selectionType = .location
+        vc.operationPath = .view
         vc.location = displayedLocations[indexPath.row]
         self.navigationController!.pushViewController(vc, animated: true)
     }

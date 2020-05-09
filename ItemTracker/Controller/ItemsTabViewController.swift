@@ -63,6 +63,7 @@ class ItemsTabViewController: UIViewController {
     @IBAction func addItemTapped(_ sender: Any) {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.SelectViewController) as! SelectViewController
         vc.selectionType = .location
+        vc.operationPath = .add
         vc.allLocations = allLocations
         vc.displayedLocations = allLocations
         self.navigationController!.pushViewController(vc, animated: true)
@@ -91,6 +92,7 @@ extension ItemsTabViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.DetailsViewController) as! DetailsViewController
         vc.selectionType = .item
+        vc.operationPath = .view
         vc.item = displayedItems[indexPath.row]
         self.navigationController!.pushViewController(vc, animated: true)
     }

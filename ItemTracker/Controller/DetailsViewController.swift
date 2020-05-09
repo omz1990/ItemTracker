@@ -27,6 +27,7 @@ class DetailsViewController: UIViewController {
     var location: Location!
     var storage: Storage!
     var item: Item!
+    var operationPath: OperationPath!
     var selectionType: SelectionType!
     
     let locationIcon = UIImage(named: Constants.Image.locationPlaceholder)
@@ -51,6 +52,7 @@ class DetailsViewController: UIViewController {
         subNameView?.isHidden = selectionType != SelectionType.location
         
         subListContainer?.isHidden = selectionType == SelectionType.item
+        viewAllISubItemsButton?.setTitle(getButtonText(), for: .normal)
     }
     
     private func populateLabels(for: SelectionType) {
@@ -62,6 +64,7 @@ class DetailsViewController: UIViewController {
             // Open storages
             let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.SelectViewController) as! SelectViewController
             vc.selectionType = .storage
+            vc.operationPath = operationPath
             let storages = location?.storages
             vc.allStorages = storages ?? []
             vc.displayedStorages = storages ?? []
@@ -71,6 +74,7 @@ class DetailsViewController: UIViewController {
             // Open items list
             let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.SelectViewController) as! SelectViewController
             vc.selectionType = .item
+            vc.operationPath = operationPath
             let items = storage?.items
             vc.allItems = items ?? []
             vc.displayedItems = items ?? []
