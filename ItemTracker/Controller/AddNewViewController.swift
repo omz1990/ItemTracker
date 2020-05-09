@@ -34,15 +34,15 @@ class AddNewViewController: UIViewController {
     private var imageFilePath: String?
     private var imageFileUrl: URL?
     
+    let locationIcon = UIImage(named: Constants.Image.locationPlaceholder)
+    let storageIcon = UIImage(named: Constants.Image.storagePlaceholder)
+    let itemIcon = UIImage(named: Constants.Image.itemPlaceholder)
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Subscribe to keyboard events
         subscribeToKeyboardWillShowNotifications()
         subscribeToKeyboardWillHideNotifications()
-        
-        if selectionType != SelectionType.location {
-            subNameContainerView.isHidden = true
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -53,8 +53,14 @@ class AddNewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         selectionType = selectionType ?? .location
+        initDisplay()
+    }
+    
+    private func initDisplay() {
+        subNameContainerView.isHidden = selectionType != SelectionType.location
+        topImageView.image = getThumbnail()
+        titleLabel.text = getScreenTitle()
     }
     
     
@@ -64,7 +70,6 @@ class AddNewViewController: UIViewController {
         } else {
             showAlert(title: "Error", message: "Camera source not available!")
         }
-        
     }
     
     @IBAction func albumButtonTapped(_ sender: Any) {
@@ -78,9 +83,10 @@ class AddNewViewController: UIViewController {
             
             switch selectionType {
                 case .location: createLocation()
-                default: createLocation()
+                case .storage: createStorage()
+                case .item: createItem()
+                default: break
             }
-            
         } else {
             showAlert(title: Constants.ErrorMessage.incompleteFieldsTile, message: Constants.ErrorMessage.incompleteFieldsBody)
         }
@@ -102,6 +108,42 @@ class AddNewViewController: UIViewController {
     
     private func getLocationObject() -> Location {
         return Location(id: "unknown", name: nameTextField?.text ?? "", subName: subNameTextField?.text ?? "", description: descriptionTextField?.text ?? "", imageUrl: "", type: "Other", subType: "Other", tags: [], createdAt: Date(), updatedAt: Date(), storages: nil)
+    }
+    
+    private func createStorage() {
+        FirebaseClient.createStorage(storage: getStorageObject()) { (success) in
+            DispatchQueue.main.async {
+                self.activityIndicator?.stopAnimating()
+                
+                if success {
+                    print("Creation successful")
+                } else {
+                    print("Creation failed")
+                }
+            }
+        }
+    }
+    
+    private func getStorageObject() -> Storage {
+        return Storage(id: "unknown", locationId: location?.id ?? "", locationName: location?.name, name: nameTextField?.text ?? "", description: descriptionTextField?.text ?? "", imageUrl: "", type: "Other", tags: [], createdAt: Date(), updatedAt: Date(), items: nil)
+    }
+    
+    private func createItem() {
+        FirebaseClient.createLocation(location: getLocationObject()) { (success) in
+            DispatchQueue.main.async {
+                self.activityIndicator?.stopAnimating()
+                
+                if success {
+                    print("Creation successful")
+                } else {
+                    print("Creation failed")
+                }
+            }
+        }
+    }
+    
+    private func getItemObject() -> Item {
+        return Item(id: "unknown", storageId: storage?.id ?? "", storageName: storage?.name ?? "", locationId: storage?.locationId ?? "", locationName: storage?.locationName ?? "", name: nameTextField?.text ?? "", description: descriptionTextField?.text ?? "", imageUrl: "", type: "Other", tags: [], createdAt: Date(), updatedAt: Date())
     }
     
     private func validateTextFields() -> Bool {
@@ -134,6 +176,32 @@ class AddNewViewController: UIViewController {
         }
         
         return valid
+    }
+    
+    private func getScreenTitle() -> String {
+        switch selectionType {
+            case .location:
+                return "New Location"
+            case .storage:
+                return "New Storage"
+            case .item:
+                return "New Item"
+            default:
+                return "Unknown"
+        }
+    }
+    
+    private func getThumbnail() -> UIImage? {
+        switch selectionType {
+            case .location:
+                return locationIcon
+            case .storage:
+                return storageIcon
+            case .item:
+                return itemIcon
+            default:
+                return nil
+        }
     }
 }
 
