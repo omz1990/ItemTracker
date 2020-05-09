@@ -21,9 +21,11 @@ class SelectViewController: UIViewController {
     var allLocations: [Location]!
     var displayedLocations: [Location]!
     
+    var selectedLocation: Location!
     var allStorages: [Storage] = []
     var displayedStorages: [Storage] = []
     
+    var selectedStorage: Storage!
     var allItems: [Item] = []
     var displayedItems: [Item] = []
     
@@ -49,6 +51,13 @@ class SelectViewController: UIViewController {
         }
     }
     
+    @IBAction func addNewButtonTapped(_ sender: Any) {
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.AddNewViewController) as! AddNewViewController
+        vc.selectionType = selectionType
+        vc.location = selectedLocation
+        vc.storage = selectedStorage
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
 }
 
 // MARK: Extension to handle Table View
@@ -87,6 +96,7 @@ extension SelectViewController: UITableViewDataSource, UITableViewDelegate {
                 vc.operationPath = operationPath
                 let storages = displayedLocations[indexPath.row].storages
                 vc.allStorages = storages ?? []
+                vc.selectedLocation = displayedLocations[indexPath.row]
                 vc.displayedStorages = storages ?? []
                 self.navigationController!.pushViewController(vc, animated: true)
             }
@@ -106,6 +116,7 @@ extension SelectViewController: UITableViewDataSource, UITableViewDelegate {
                 let items = displayedStorages[indexPath.row].items
                 vc.allItems = items ?? []
                 vc.displayedItems = items ?? []
+                vc.selectedStorage = displayedStorages[indexPath.row]
                 self.navigationController!.pushViewController(vc, animated: true)
             }
         } else if selectionType == SelectionType.item {

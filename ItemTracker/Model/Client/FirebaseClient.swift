@@ -144,7 +144,7 @@ class FirebaseClient {
             let path = "\(DatabaseCollection.storage(uid: uid).path)/\(storage.locationId)"
             let fieldsDictionary = mapStorageStructToDictionary(storage: storage)
             print("Storage fields to add: \(fieldsDictionary)")
-            
+
             dbRef.child(path).childByAutoId().setValue(fieldsDictionary) { (error, ref) in
                 completion(error == nil)
             }
@@ -160,7 +160,7 @@ class FirebaseClient {
             let path = "\(DatabaseCollection.item(uid: uid).path)/\(item.locationId)/\(item.storageId)"
             let fieldsDictionary = mapItemStructToDictionary(item: item)
             print("Item fields to add: \(fieldsDictionary)")
-            
+
             dbRef.child(path).childByAutoId().setValue(fieldsDictionary) { (error, ref) in
                 completion(error == nil)
             }

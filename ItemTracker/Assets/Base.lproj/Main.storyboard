@@ -1091,15 +1091,36 @@ Sign in to start tracking your stuff!</string>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbK-z8-gsE">
+                                                <rect key="frame" x="36" y="173" width="342" height="56"/>
+                                                <color key="backgroundColor" red="1" green="0.27058823529999998" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="56" id="NBR-0T-W4r"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <state key="normal" title="Add New">
+                                                    <color key="titleColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="14"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="addNewButtonTapped:" destination="nNB-QN-3YK" eventType="touchUpInside" id="Ciq-R5-qBR"/>
+                                                    <action selector="createButtonTapped:" destination="gA4-L6-kYr" eventType="touchUpInside" id="lA4-Wv-PIb"/>
+                                                    <action selector="viewAllSubItemsTapped:" destination="4Yu-Z1-rxn" eventType="touchUpInside" id="Pg0-m1-xMW"/>
+                                                </connections>
+                                            </button>
                                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="abL-Qq-SBK">
-                                                <rect key="frame" x="8" y="165" width="398" height="56"/>
+                                                <rect key="frame" x="8" y="241" width="398" height="56"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="nNB-QN-3YK" id="B40-mz-WzB"/>
                                                 </connections>
                                             </searchBar>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yto-dC-MeX">
-                                                <rect key="frame" x="0.0" y="221" width="414" height="597"/>
+                                                <rect key="frame" x="0.0" y="297" width="414" height="521"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="myW-j1-P52" customClass="OverviewTableViewCell" customModule="ItemTracker" customModuleProvider="target">
@@ -1119,10 +1140,12 @@ Sign in to start tracking your stuff!</string>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
+                                            <constraint firstItem="abL-Qq-SBK" firstAttribute="top" secondItem="kbK-z8-gsE" secondAttribute="bottom" constant="12" id="0J2-kJ-53a"/>
+                                            <constraint firstItem="kbK-z8-gsE" firstAttribute="leading" secondItem="crV-su-xoh" secondAttribute="leading" constant="36" id="E8c-Em-IfF"/>
                                             <constraint firstItem="Aey-qM-inG" firstAttribute="top" secondItem="crV-su-xoh" secondAttribute="top" constant="20" id="G8A-ga-Boi"/>
                                             <constraint firstItem="Yto-dC-MeX" firstAttribute="leading" secondItem="crV-su-xoh" secondAttribute="leading" id="GLq-pp-exb"/>
-                                            <constraint firstItem="abL-Qq-SBK" firstAttribute="top" secondItem="ts0-LU-mSM" secondAttribute="bottom" constant="4" id="IQB-bM-8dh"/>
                                             <constraint firstAttribute="trailing" secondItem="abL-Qq-SBK" secondAttribute="trailing" constant="8" id="Ige-hm-apQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="kbK-z8-gsE" secondAttribute="trailing" constant="36" id="PCP-yO-6DI"/>
                                             <constraint firstItem="ts0-LU-mSM" firstAttribute="centerX" secondItem="crV-su-xoh" secondAttribute="centerX" id="VPb-n6-sMF"/>
                                             <constraint firstItem="Yto-dC-MeX" firstAttribute="top" secondItem="abL-Qq-SBK" secondAttribute="bottom" id="afe-ta-Rpd"/>
                                             <constraint firstItem="abL-Qq-SBK" firstAttribute="leading" secondItem="crV-su-xoh" secondAttribute="leading" constant="8" id="bW6-bJ-Did"/>
@@ -1130,6 +1153,7 @@ Sign in to start tracking your stuff!</string>
                                             <constraint firstItem="Aey-qM-inG" firstAttribute="centerX" secondItem="crV-su-xoh" secondAttribute="centerX" id="nSS-uX-3ml"/>
                                             <constraint firstAttribute="trailing" secondItem="Yto-dC-MeX" secondAttribute="trailing" id="rl0-aP-z6w"/>
                                             <constraint firstItem="ts0-LU-mSM" firstAttribute="top" secondItem="Aey-qM-inG" secondAttribute="bottom" constant="20" id="sdD-H0-pWz"/>
+                                            <constraint firstItem="kbK-z8-gsE" firstAttribute="top" secondItem="ts0-LU-mSM" secondAttribute="bottom" constant="12" id="z2h-Ki-BGN"/>
                                         </constraints>
                                     </view>
                                 </subviews>

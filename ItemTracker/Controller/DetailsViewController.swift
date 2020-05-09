@@ -68,6 +68,7 @@ class DetailsViewController: UIViewController {
             let storages = location?.storages
             vc.allStorages = storages ?? []
             vc.displayedStorages = storages ?? []
+            vc.selectedLocation = location
             self.navigationController!.pushViewController(vc, animated: true)
             
         } else if selectionType == SelectionType.storage {
@@ -78,6 +79,7 @@ class DetailsViewController: UIViewController {
             let items = storage?.items
             vc.allItems = items ?? []
             vc.displayedItems = items ?? []
+            vc.selectedStorage = storage
             self.navigationController!.pushViewController(vc, animated: true)
         }
     }

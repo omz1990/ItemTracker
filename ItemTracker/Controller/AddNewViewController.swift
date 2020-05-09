@@ -129,7 +129,7 @@ class AddNewViewController: UIViewController {
     }
     
     private func createItem() {
-        FirebaseClient.createLocation(location: getLocationObject()) { (success) in
+        FirebaseClient.createItem(item: getItemObject() ) { (success) in
             DispatchQueue.main.async {
                 self.activityIndicator?.stopAnimating()
                 
