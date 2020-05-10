@@ -27,6 +27,7 @@ class AddNewViewController: UIViewController {
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    var operationPath: OperationPath!
     var selectionType: SelectionType!
     var location: Location!
     var storage: Storage!
@@ -97,11 +98,23 @@ class AddNewViewController: UIViewController {
             DispatchQueue.main.async {
                 self.activityIndicator?.stopAnimating()
                 if success {
-                    self.navigationController?.popViewController(animated: true)
+                    self.handleLocationCreationSuccess()
                 } else {
                     self.showAlert(title: "Error", message: "Couuld not create Location. Please try again.")
                 }
             }
+        }
+    }
+    
+    private func handleLocationCreationSuccess() {
+        navigationController?.popViewController(animated: true)
+
+        if operationPath == OperationPath.add {
+            navigationController?.popViewController(animated: true)
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.SelectViewController) as! SelectViewController
+            vc.selectionType = .location
+            vc.operationPath = operationPath
+            self.navigationController!.pushViewController(vc, animated: true)
         }
     }
     

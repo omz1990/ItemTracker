@@ -96,6 +96,7 @@ class SelectViewController: UIViewController {
     
     @IBAction func addNewButtonTapped(_ sender: Any) {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.AddNewViewController) as! AddNewViewController
+        vc.operationPath = .view
         vc.selectionType = selectionType
         vc.location = selectedLocation
         vc.storage = selectedStorage

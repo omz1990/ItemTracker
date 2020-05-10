@@ -122,9 +122,9 @@ class DetailsViewController: UIViewController {
     private func getButtonText() -> String {
         switch selectionType {
             case .location:
-                return "View all Storages"
+                return "View or Add Storages"
             case .storage:
-                return "View all Items"
+                return "View or Add Items"
             default:
                 return "-"
         }

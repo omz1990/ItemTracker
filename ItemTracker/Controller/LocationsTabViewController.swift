@@ -50,6 +50,7 @@ class LocationsTabViewController: UIViewController {
     @IBAction func addLocationTapped(_ sender: Any) {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.AddNewViewController) as! AddNewViewController
         vc.selectionType = .location
+        vc.operationPath = .add
         self.navigationController!.pushViewController(vc, animated: true)
     }
 }
