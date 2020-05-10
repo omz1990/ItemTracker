@@ -78,7 +78,8 @@ class FirebaseClient {
     // MARK: Fetch data from Firebase
     private class func getLocationsList(uid: String, dbRef: DatabaseReference, completion: @escaping ([Location]?, Error?) -> Void) {
         let path = DatabaseCollection.location(uid: uid).path
-        dbRef.child(path).observeSingleEvent(of: .value) { (snapshot) in
+        
+        dbRef.child(path).observe(.value) { (snapshot) in
             let locationsDict = snapshot.value as? [String: AnyObject]
             var locations: [Location] = []
             
@@ -93,7 +94,7 @@ class FirebaseClient {
     private class func getStoragesList(uid: String, locationId: String, dbRef: DatabaseReference, completion: @escaping ([Storage]?, Error?) -> Void) {
         let path = "\(DatabaseCollection.storage(uid: uid).path)/\(locationId)"
         
-        dbRef.child(path).observeSingleEvent(of: .value) { (snapshot) in
+        dbRef.child(path).observe(.value) { (snapshot) in
             let storagesDict = snapshot.value as? [String: AnyObject]
             var storages: [Storage] = []
             
@@ -107,8 +108,8 @@ class FirebaseClient {
     
     private class func getItemsList(uid: String, locationId: String, storageId: String, dbRef: DatabaseReference, completion: @escaping ([Item]?, Error?) -> Void) {
         let path = "\(DatabaseCollection.item(uid: uid).path)/\(locationId)/\(storageId)"
-
-        dbRef.child(path).observeSingleEvent(of: .value) { (snapshot) in
+        
+        dbRef.child(path).observe(.value) { (snapshot) in
             let itemsDict = snapshot.value as? [String: AnyObject]
             var items: [Item] = []
 
@@ -123,13 +124,13 @@ class FirebaseClient {
     // MARK: Create data in Firebase
     class func createLocation(location: Location, completion: @escaping (Bool) -> Void) {
         if let uid = Auth.auth().currentUser?.uid {
-            let dbRef = Database.database().reference()
+            let dbRef = Database.database().reference(withPath: DatabaseCollection.location(uid: uid).path)
+            dbRef.keepSynced(true)
             
-            let path = DatabaseCollection.location(uid: uid).path
             let fieldsDictionary = mapLocationStructToDictionary(location: location)
             print("Locations fields to add: \(fieldsDictionary)")
             
-            dbRef.child(path).childByAutoId().setValue(fieldsDictionary) { (error, ref) in
+            dbRef.childByAutoId().setValue(fieldsDictionary) { (error, ref) in
                 completion(error == nil)
             }
         } else {
@@ -139,9 +140,10 @@ class FirebaseClient {
     
     class func createStorage(storage: Storage, completion: @escaping (Bool) -> Void) {
         if let uid = Auth.auth().currentUser?.uid {
-            let dbRef = Database.database().reference()
+            let dbRef = Database.database().reference(withPath: DatabaseCollection.storage(uid: uid).path)
+            dbRef.keepSynced(true)
             
-            let path = "\(DatabaseCollection.storage(uid: uid).path)/\(storage.locationId)"
+            let path = storage.locationId
             let fieldsDictionary = mapStorageStructToDictionary(storage: storage)
             print("Storage fields to add: \(fieldsDictionary)")
 
@@ -155,9 +157,10 @@ class FirebaseClient {
     
     class func createItem(item: Item, completion: @escaping (Bool) -> Void) {
         if let uid = Auth.auth().currentUser?.uid {
-            let dbRef = Database.database().reference()
+            let dbRef = Database.database().reference(withPath: DatabaseCollection.item(uid: uid).path)
+            dbRef.keepSynced(true)
             
-            let path = "\(DatabaseCollection.item(uid: uid).path)/\(item.locationId)/\(item.storageId)"
+            let path = "\(item.locationId)/\(item.storageId)"
             let fieldsDictionary = mapItemStructToDictionary(item: item)
             print("Item fields to add: \(fieldsDictionary)")
 
