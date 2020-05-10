@@ -19,9 +19,6 @@ struct Constants {
         static let SelectViewController = "SelectViewController"
         static let DetailsViewController = "DetailsViewController"
     }
-
-    struct Segues {
-    }
     
     struct View {
         static let LocationCell = "locationCell"
@@ -33,13 +30,6 @@ struct Constants {
     
     struct NotificationKeys {
         static let SignedIn = "onSignInCompleted"
-    }
-
-    struct MessageFields {
-        static let name = "name"
-        static let text = "text"
-        static let photoURL = "photoUrl"
-        static let imageURL = "imageUrl"
     }
     
     struct ErrorMessage {
