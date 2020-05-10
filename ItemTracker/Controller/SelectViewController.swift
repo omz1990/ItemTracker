@@ -186,7 +186,7 @@ extension SelectViewController: UITableViewDataSource, UITableViewDelegate {
         let line1Body = getLineOneBody(location: location, storage: storage, item: item)
         let line2Body = getLineTwoBody(location: location, storage: storage, item: item)
         
-        cell.initCell(heading: title, line1Title: getLineOneTitle(), line1Body: line1Body, line2Title: getLineTwoTitle(), line2Body: line2Body, image: getThumbnail())
+        cell.initCell(heading: title, line1Title: getLineOneTitle(), line1Body: line1Body, line2Title: getLineTwoTitle(), line2Body: line2Body, image: getThumbnail(selectionType: selectionType))
         
         return cell
     }
@@ -247,19 +247,6 @@ extension SelectViewController: UITableViewDataSource, UITableViewDelegate {
                 return "\(storage?.items?.count ?? 0)"
             case .item:
                 return item?.storageName ?? ""
-            default:
-                return nil
-        }
-    }
-    
-    private func getThumbnail() -> UIImage? {
-        switch selectionType {
-            case .location:
-                return locationIcon
-            case .storage:
-                return storageIcon
-            case .item:
-                return itemIcon
             default:
                 return nil
         }

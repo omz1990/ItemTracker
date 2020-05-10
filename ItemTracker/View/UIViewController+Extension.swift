@@ -11,6 +11,17 @@ import Firebase
 
 extension UIViewController {
     
+    func getThumbnail(selectionType: SelectionType) -> UIImage? {
+        switch selectionType {
+            case .location:
+                return UIImage(named: Constants.Image.locationPlaceholder)
+            case .storage:
+                return UIImage(named: Constants.Image.storagePlaceholder)
+            case .item:
+                return UIImage(named: Constants.Image.itemPlaceholder)
+        }
+    }
+    
     func presentViewController(storyboardId: String) {
         let storyboard = UIStoryboard(name: Constants.Storyboard.Main, bundle: nil)
         let secondVC = storyboard.instantiateViewController(withIdentifier: storyboardId)

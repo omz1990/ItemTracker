@@ -6,7 +6,6 @@
 //  Copyright © 2020 AmmoLogic Training. All rights reserved.
 //
 
-import Photos
 import UIKit
 import Firebase
 
@@ -21,9 +20,6 @@ class AddNewViewController: UIViewController {
     @IBOutlet weak var subNameBottomBorder: UIView!
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var descriptionBottomBorder: UIView!
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var cameraButton: UIButton!
-    @IBOutlet weak var albumButtom: UIButton!
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -31,13 +27,6 @@ class AddNewViewController: UIViewController {
     var selectionType: SelectionType!
     var location: Location!
     var storage: Storage!
-    
-    private var imageFilePath: String?
-    private var imageFileUrl: URL?
-    
-    let locationIcon = UIImage(named: Constants.Image.locationPlaceholder)
-    let storageIcon = UIImage(named: Constants.Image.storagePlaceholder)
-    let itemIcon = UIImage(named: Constants.Image.itemPlaceholder)
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -60,21 +49,8 @@ class AddNewViewController: UIViewController {
     
     private func initDisplay() {
         subNameContainerView.isHidden = selectionType != SelectionType.location
-        topImageView.image = getThumbnail()
+        topImageView.image = getThumbnail(selectionType: selectionType)
         titleLabel.text = getScreenTitle()
-    }
-    
-    
-    @IBAction func cameraButtonTapped(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            pickAnImage(sourceType: .camera, delegate: self)
-        } else {
-            showAlert(title: "Error", message: "Camera source not available!")
-        }
-    }
-    
-    @IBAction func albumButtonTapped(_ sender: Any) {
-        pickAnImage(sourceType: .photoLibrary, delegate: self)
     }
     
     @IBAction func createButtonTapped(_ sender: Any) {
@@ -199,55 +175,5 @@ class AddNewViewController: UIViewController {
             default:
                 return "Unknown"
         }
-    }
-    
-    private func getThumbnail() -> UIImage? {
-        switch selectionType {
-            case .location:
-                return locationIcon
-            case .storage:
-                return storageIcon
-            case .item:
-                return itemIcon
-            default:
-                return nil
-        }
-    }
-}
-
-// MARK: Handle image selection and upload extension
-extension AddNewViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-        picker.dismiss(animated: true, completion: nil)
-        
-        // Show the image in the image placeholder
-        if let image = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
-            imageView.image = image
-        }
-        
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        
-        if let referenceURL = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.referenceURL)] as? URL {
-          let assets = PHAsset.fetchAssets(withALAssetURLs: [referenceURL], options: nil)
-          let asset = assets.firstObject
-          asset?.requestContentEditingInput(with: nil, completionHandler: { (contentEditingInput, info) in
-            self.imageFileUrl = contentEditingInput?.fullSizeImageURL
-            self.imageFilePath = "\(uid)/\(Int(Date.timeIntervalSinceReferenceDate * 1000))/\((referenceURL as AnyObject).lastPathComponent!)"
-          })
-        }
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-    }
-    
-    private func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-        return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
-    }
-
-    private func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-        return input.rawValue
     }
 }

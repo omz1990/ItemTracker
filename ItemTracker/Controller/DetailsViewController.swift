@@ -42,7 +42,7 @@ class DetailsViewController: UIViewController {
     private func initDisplay() {
         imageViewContainer.isHidden = true
         
-        thumbnailImageView?.image = getThumbnail()
+        thumbnailImageView?.image = getThumbnail(selectionType: selectionType)
         titleLabel?.text = getScreenTitle()
         nameLabel?.text = getName(location, storage, item)
         descriptionLabel?.text = getDescription(location, storage, item)
@@ -139,18 +139,5 @@ class DetailsViewController: UIViewController {
            default:
                return ""
        }
-    }
-    
-    private func getThumbnail() -> UIImage? {
-        switch selectionType {
-            case .location:
-                return locationIcon
-            case .storage:
-                return storageIcon
-            case .item:
-                return itemIcon
-            default:
-                return nil
-        }
     }
 }

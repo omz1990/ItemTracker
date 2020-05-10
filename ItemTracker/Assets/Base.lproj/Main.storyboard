@@ -462,7 +462,7 @@ Sign in to start tracking your stuff!</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8I4-JI-lxL">
-                                                <rect key="frame" x="36" y="171" width="342" height="334"/>
+                                                <rect key="frame" x="36" y="171" width="342" height="150"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Du2-wV-Dw1">
                                                         <rect key="frame" x="0.0" y="0.0" width="342" height="50"/>
@@ -554,110 +554,10 @@ Sign in to start tracking your stuff!</string>
                                                             <constraint firstItem="JaW-L5-ouG" firstAttribute="bottom" secondItem="MKt-Ps-dWN" secondAttribute="bottom" id="xR4-oa-GSy"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FrJ-NF-hKZ">
-                                                        <rect key="frame" x="0.0" y="150" width="342" height="184"/>
-                                                        <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RZr-3K-q7q" customClass="RoundedView" customModule="ItemTracker" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="20" width="342" height="160"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qsF-Yi-YVF">
-                                                                        <rect key="frame" x="8" y="109.5" width="170" height="30"/>
-                                                                        <state key="normal" title="Open Album">
-                                                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                                        </state>
-                                                                        <userDefinedRuntimeAttributes>
-                                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                                <real key="value" value="2"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                <real key="value" value="10"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                                <color key="value" cocoaTouchSystemColor="darkTextColor"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                        </userDefinedRuntimeAttributes>
-                                                                        <connections>
-                                                                            <action selector="albumButtonTapped:" destination="gA4-L6-kYr" eventType="touchUpInside" id="F85-wA-wnZ"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xwT-nD-0Lz">
-                                                                        <rect key="frame" x="186" y="5" width="150" height="150"/>
-                                                                        <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="150" id="44P-Cs-Bcd"/>
-                                                                            <constraint firstAttribute="width" constant="150" id="aOb-sk-eyN"/>
-                                                                        </constraints>
-                                                                    </imageView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add image" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72p-zs-qKK">
-                                                                        <rect key="frame" x="12" y="10" width="168" height="20.5"/>
-                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                                        <nil key="textColor"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yN2-no-yNO">
-                                                                        <rect key="frame" x="8" y="84.5" width="170" height="17"/>
-                                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                                        <nil key="textColor"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1PB-jy-nH7">
-                                                                        <rect key="frame" x="8" y="46.5" width="170" height="30"/>
-                                                                        <state key="normal" title="Open Camera">
-                                                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                                        </state>
-                                                                        <userDefinedRuntimeAttributes>
-                                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                                <real key="value" value="2"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                <real key="value" value="10"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                                <color key="value" cocoaTouchSystemColor="darkTextColor"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                        </userDefinedRuntimeAttributes>
-                                                                        <connections>
-                                                                            <action selector="cameraButtonTapped:" destination="gA4-L6-kYr" eventType="touchUpInside" id="fmq-Wg-opk"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                </subviews>
-                                                                <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <constraints>
-                                                                    <constraint firstItem="72p-zs-qKK" firstAttribute="leading" secondItem="RZr-3K-q7q" secondAttribute="leading" constant="12" id="CnX-Dd-He2"/>
-                                                                    <constraint firstItem="qsF-Yi-YVF" firstAttribute="leading" secondItem="RZr-3K-q7q" secondAttribute="leading" constant="8" id="HdK-eC-ggS"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="xwT-nD-0Lz" secondAttribute="trailing" constant="6" id="Oc7-VU-To9"/>
-                                                                    <constraint firstItem="qsF-Yi-YVF" firstAttribute="top" secondItem="yN2-no-yNO" secondAttribute="bottom" constant="8" id="OsM-oN-qek"/>
-                                                                    <constraint firstItem="xwT-nD-0Lz" firstAttribute="centerY" secondItem="RZr-3K-q7q" secondAttribute="centerY" id="RDU-rY-Ugf"/>
-                                                                    <constraint firstAttribute="height" constant="160" id="XRY-yI-AS6"/>
-                                                                    <constraint firstItem="xwT-nD-0Lz" firstAttribute="leading" secondItem="72p-zs-qKK" secondAttribute="trailing" constant="6" id="ZSc-rY-JfJ"/>
-                                                                    <constraint firstItem="xwT-nD-0Lz" firstAttribute="leading" secondItem="qsF-Yi-YVF" secondAttribute="trailing" constant="8" id="aQ2-vw-217"/>
-                                                                    <constraint firstItem="72p-zs-qKK" firstAttribute="top" secondItem="RZr-3K-q7q" secondAttribute="top" constant="10" id="bCr-c7-jO4"/>
-                                                                    <constraint firstItem="yN2-no-yNO" firstAttribute="top" secondItem="1PB-jy-nH7" secondAttribute="bottom" constant="8" id="dxP-Cd-enb"/>
-                                                                    <constraint firstItem="xwT-nD-0Lz" firstAttribute="leading" secondItem="1PB-jy-nH7" secondAttribute="trailing" constant="8" id="fbQ-iU-Yyq"/>
-                                                                    <constraint firstItem="1PB-jy-nH7" firstAttribute="leading" secondItem="RZr-3K-q7q" secondAttribute="leading" constant="8" id="gfH-Af-Owb"/>
-                                                                    <constraint firstItem="1PB-jy-nH7" firstAttribute="top" secondItem="72p-zs-qKK" secondAttribute="bottom" constant="16" id="ly7-jk-DHB"/>
-                                                                    <constraint firstItem="yN2-no-yNO" firstAttribute="leading" secondItem="1PB-jy-nH7" secondAttribute="leading" id="pgV-9T-jwZ"/>
-                                                                    <constraint firstItem="yN2-no-yNO" firstAttribute="trailing" secondItem="1PB-jy-nH7" secondAttribute="trailing" id="uN1-UM-4Cw"/>
-                                                                </constraints>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                        <real key="value" value="10"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                        </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="bottom" secondItem="RZr-3K-q7q" secondAttribute="bottom" constant="4" id="PIa-rm-qrO"/>
-                                                            <constraint firstAttribute="trailing" secondItem="RZr-3K-q7q" secondAttribute="trailing" id="cNn-SE-MWG"/>
-                                                            <constraint firstItem="RZr-3K-q7q" firstAttribute="leading" secondItem="FrJ-NF-hKZ" secondAttribute="leading" id="mUz-2M-WAB"/>
-                                                            <constraint firstItem="RZr-3K-q7q" firstAttribute="top" secondItem="FrJ-NF-hKZ" secondAttribute="top" constant="20" id="sm3-rT-cbx"/>
-                                                        </constraints>
-                                                    </view>
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWk-UV-I1P">
-                                                <rect key="frame" x="36" y="525" width="342" height="56"/>
+                                                <rect key="frame" x="36" y="341" width="342" height="56"/>
                                                 <color key="backgroundColor" red="1" green="0.27058823529999998" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="56" id="72B-z7-eYE"/>
@@ -718,12 +618,9 @@ Sign in to start tracking your stuff!</string>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="gOU-br-qoJ" id="NUq-vz-JRX"/>
-                        <outlet property="albumButtom" destination="qsF-Yi-YVF" id="wJP-8e-0PK"/>
-                        <outlet property="cameraButton" destination="1PB-jy-nH7" id="554-fd-jsn"/>
                         <outlet property="createButton" destination="gWk-UV-I1P" id="gAd-Cc-4aX"/>
                         <outlet property="descriptionBottomBorder" destination="MKt-Ps-dWN" id="z2U-zm-4xF"/>
                         <outlet property="descriptionTextField" destination="JaW-L5-ouG" id="wpb-wK-nhk"/>
-                        <outlet property="imageView" destination="xwT-nD-0Lz" id="mtm-7t-ar0"/>
                         <outlet property="nameBottomBorder" destination="gBt-8c-hGp" id="QNa-Le-g22"/>
                         <outlet property="nameTextField" destination="u67-ah-ZCu" id="vOa-dx-apB"/>
                         <outlet property="subNameBottomBorder" destination="Wbk-db-D8y" id="5DZ-iy-nNv"/>
