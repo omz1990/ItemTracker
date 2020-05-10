@@ -13,6 +13,7 @@ class ItemsTabViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var errorLabel: UILabel!
     
     var allLocations: [Location] = []
     var allItems: [Item] = []
@@ -20,26 +21,41 @@ class ItemsTabViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let nibName = UINib(nibName: Constants.View.OverviewTableView, bundle: nil)
+        tableView.register(nibName, forCellReuseIdentifier: Constants.View.ItemRow)
 
         FirebaseClient.getLocations { (locations, error) in
-            guard let locations = locations else {
-                print("Could not find any locations")
-                return
-            }
-            
             DispatchQueue.main.async {
-                self.allLocations = locations
-                
-                guard let allItemsFromLocations = self.getAllItemsFromLocations(locations: locations) else {
-                    print("Could not find any items")
-                    return
-                }
-                self.allItems = allItemsFromLocations
-                self.displayedItems = allItemsFromLocations
-                self.tableView?.reloadData()
-                self.activityIndicator?.stopAnimating()
+                self.handleLocationsResponse(locations: locations)
             }
         }
+    }
+    
+    private func handleLocationsResponse(locations: [Location]?) {
+        let errorText = "No Items found. You can add new items by tapping on the + icon on the top left of this screen!"
+        activityIndicator?.stopAnimating()
+        guard let locations = locations else {
+            allItems = []
+            displayedItems = []
+            tableView?.reloadData()
+            errorLabel?.text = errorText
+            return
+        }
+        
+        allLocations = locations
+        
+        guard let allItemsFromLocations = self.getAllItemsFromLocations(locations: locations) else {
+            allItems = []
+            displayedItems = []
+            tableView?.reloadData()
+            errorLabel?.text = errorText
+            return
+        }
+        errorLabel?.text = ""
+        allItems = allItemsFromLocations
+        displayedItems = allItemsFromLocations
+        tableView?.reloadData()
     }
     
     private func getAllItemsFromLocations(locations: [Location]) -> [Item]? {
@@ -55,6 +71,13 @@ class ItemsTabViewController: UIViewController {
 
     @IBAction func logoutTapped(_ sender: Any) {
         logout()
+    }
+    
+    @IBAction func addItemTapped(_ sender: Any) {
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.SelectViewController) as! SelectViewController
+        vc.selectionType = .location
+        vc.operationPath = .add
+        self.navigationController!.pushViewController(vc, animated: true)
     }
 }
 
@@ -72,11 +95,17 @@ extension ItemsTabViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = displayedItems[indexPath.row]
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.View.ItemRow) as! ItemTableViewCell
-        cell.titleTextView.text = item.name
-        cell.locationTextView.text = item.locationName
-        cell.storageTextView.text = item.storageName
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.View.ItemRow) as! OverviewTableViewCell
+        cell.initCell(heading: item.name, line1Title: "Location", line1Body: item.locationName, line2Title: "Storage", line2Body: item.storageName, image: nil)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.DetailsViewController) as! DetailsViewController
+        vc.selectionType = .item
+        vc.operationPath = .view
+        vc.item = displayedItems[indexPath.row]
+        self.navigationController!.pushViewController(vc, animated: true)
     }
     
 }

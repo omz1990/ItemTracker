@@ -10,9 +10,9 @@ import Foundation
 
 struct Item {
     let id: String
-    let storageId: String
+    var storageId: String
     var storageName: String?
-    let locationId: String
+    var locationId: String
     var locationName: String?
     let name: String
     let description: String?

@@ -10,7 +10,8 @@ import Foundation
 
 struct Storage {
     let id: String
-    let locationId: String
+    var locationId: String
+    var locationName: String?
     let name: String
     let description: String?
     let imageUrl: String?

@@ -15,6 +15,7 @@ class LocationsTabViewController: UIViewController {
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var errorLabel: UILabel!
     
     var allLocations: [Location] = []
     var displayedLocations: [Location] = []
@@ -29,24 +30,36 @@ class LocationsTabViewController: UIViewController {
         activityIndicator.startAnimating()
         
         FirebaseClient.getLocations { (locations, error) in
-            guard let locations = locations else {
-                print("Could not find any locations")
-                return
-            }
-            
             DispatchQueue.main.async {
-                self.allLocations = locations
-                self.displayedLocations = locations
-                self.collectionView?.reloadData()
-                self.activityIndicator?.stopAnimating()
+                self.handleLocationsResponse(locations: locations)
             }
         }
+    }
+        
+    private func handleLocationsResponse(locations: [Location]?) {
+        activityIndicator?.stopAnimating()
+        
+        if locations == nil {
+            errorLabel?.text = "No Locations found. You can add new locations by tapping on the + icon on the top left of this screen!"
+        } else {
+            errorLabel?.text = ""
+        }
+        
+        allLocations = locations ?? []
+        displayedLocations = locations ?? []
+        collectionView?.reloadData()
     }
     
     @IBAction func logoutTapped(_ sender: Any) {
         logout()
     }
     
+    @IBAction func addLocationTapped(_ sender: Any) {
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.AddNewViewController) as! AddNewViewController
+        vc.selectionType = .location
+        vc.operationPath = .add
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
 }
 
 // MARK: Extension to handle Collection View
@@ -62,6 +75,14 @@ extension LocationsTabViewController: UICollectionViewDataSource, UICollectionVi
         cell.locationNameTextView.text = location.getDisplayName()
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.DetailsViewController) as! DetailsViewController
+        vc.selectionType = .location
+        vc.operationPath = .view
+        vc.location = displayedLocations[indexPath.row]
+        self.navigationController!.pushViewController(vc, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
