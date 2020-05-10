@@ -145,14 +145,6 @@ class AddNewViewController: UIViewController {
             nameBottomBorder.backgroundColor = validColor
         }
         
-        // Description field is required for all addition types
-        if descriptionTextField.text?.isEmpty == true {
-            descriptionBottomBorder.backgroundColor = errorColor
-            valid = false
-        } else {
-            descriptionBottomBorder.backgroundColor = validColor
-        }
-        
         // Sub name is only required for Location addition type
         if (selectionType == SelectionType.location && subNameTextField.text?.isEmpty == true) {
             subNameBottomBorder.backgroundColor = errorColor

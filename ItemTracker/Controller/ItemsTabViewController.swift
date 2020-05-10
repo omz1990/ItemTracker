@@ -36,6 +36,9 @@ class ItemsTabViewController: UIViewController {
         let errorText = "No Items found. You can add new items by tapping on the + icon on the top left of this screen!"
         activityIndicator?.stopAnimating()
         guard let locations = locations else {
+            allItems = []
+            displayedItems = []
+            tableView?.reloadData()
             errorLabel?.text = errorText
             return
         }
@@ -43,6 +46,9 @@ class ItemsTabViewController: UIViewController {
         allLocations = locations
         
         guard let allItemsFromLocations = self.getAllItemsFromLocations(locations: locations) else {
+            allItems = []
+            displayedItems = []
+            tableView?.reloadData()
             errorLabel?.text = errorText
             return
         }

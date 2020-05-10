@@ -38,14 +38,15 @@ class LocationsTabViewController: UIViewController {
         
     private func handleLocationsResponse(locations: [Location]?) {
         activityIndicator?.stopAnimating()
-        guard let locations = locations else {
+        
+        if locations == nil {
             errorLabel?.text = "No Locations found. You can add new locations by tapping on the + icon on the top left of this screen!"
-            return
+        } else {
+            errorLabel?.text = ""
         }
         
-        errorLabel?.text = ""
-        allLocations = locations
-        displayedLocations = locations
+        allLocations = locations ?? []
+        displayedLocations = locations ?? []
         collectionView?.reloadData()
     }
     
