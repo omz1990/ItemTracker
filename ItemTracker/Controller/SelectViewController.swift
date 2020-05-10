@@ -56,13 +56,8 @@ class SelectViewController: UIViewController {
     
     private func initDataChangeObserver() {
         FirebaseClient.getLocations { (locations, error) in
-            guard let locations = locations else {
-                print("Could not find any locations")
-                return
-            }
-            
             DispatchQueue.main.async {
-                self.updateUI(locations: locations)
+                self.updateUI(locations: locations ?? [])
             }
         }
     }
@@ -97,7 +92,7 @@ class SelectViewController: UIViewController {
     
     @IBAction func addNewButtonTapped(_ sender: Any) {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.AddNewViewController) as! AddNewViewController
-        vc.operationPath = .view
+        vc.operationPath = operationPath
         vc.selectionType = selectionType
         vc.location = selectedLocation
         vc.storage = selectedStorage

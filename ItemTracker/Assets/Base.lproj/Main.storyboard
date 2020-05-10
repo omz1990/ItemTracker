@@ -95,7 +95,7 @@ Sign in to start tracking your stuff!</string>
                                                     <constraint firstAttribute="height" constant="30" id="zc4-9H-MNW"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" textContentType="email"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done" textContentType="email"/>
                                             </textField>
                                             <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ah-VO-Gio">
                                                 <rect key="frame" x="36" y="416" width="342" height="2"/>
@@ -110,7 +110,7 @@ Sign in to start tracking your stuff!</string>
                                                     <constraint firstAttribute="height" constant="30" id="gwd-DC-WFU"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
                                             <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i3x-BZ-M9Y">
                                                 <rect key="frame" x="36" y="470" width="342" height="2"/>
@@ -484,7 +484,7 @@ Sign in to start tracking your stuff!</string>
                                                                     <constraint firstAttribute="height" constant="30" id="qxZ-O4-YUn"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done" textContentType="name"/>
                                                             </textField>
                                                             <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gBt-8c-hGp">
                                                                 <rect key="frame" x="0.0" y="48" width="342" height="2"/>
@@ -514,7 +514,7 @@ Sign in to start tracking your stuff!</string>
                                                                     <constraint firstAttribute="height" constant="30" id="J3L-2r-zjQ"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" textContentType="name"/>
                                                             </textField>
                                                             <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wbk-db-D8y">
                                                                 <rect key="frame" x="0.0" y="48" width="342" height="2"/>
@@ -544,7 +544,7 @@ Sign in to start tracking your stuff!</string>
                                                                     <constraint firstAttribute="height" constant="30" id="9Cp-Mr-amk"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" textContentType="name"/>
                                                             </textField>
                                                             <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MKt-Ps-dWN">
                                                                 <rect key="frame" x="0.0" y="48" width="342" height="2"/>
@@ -680,7 +680,7 @@ Sign in to start tracking your stuff!</string>
                             </label>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search item" translatesAutoresizingMaskIntoConstraints="NO" id="Qpn-iO-Ois">
                                 <rect key="frame" x="8" y="145" width="398" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
                                     <outlet property="delegate" destination="79A-oK-3yH" id="eMO-Nh-x3U"/>
                                 </connections>
@@ -817,7 +817,7 @@ Sign in to start tracking your stuff!</string>
                                                     <constraint firstAttribute="height" constant="30" id="A9p-vp-pRt"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done" textContentType="name"/>
                                             </textField>
                                             <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mHB-pq-OSe">
                                                 <rect key="frame" x="36" y="282" width="342" height="2"/>
@@ -832,7 +832,7 @@ Sign in to start tracking your stuff!</string>
                                                     <constraint firstAttribute="height" constant="30" id="jKP-vD-uGc"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" textContentType="email"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done" textContentType="email"/>
                                             </textField>
                                             <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bhd-ZZ-Gt3">
                                                 <rect key="frame" x="36" y="336" width="342" height="2"/>
@@ -847,7 +847,7 @@ Sign in to start tracking your stuff!</string>
                                                     <constraint firstAttribute="height" constant="30" id="9cL-L1-K9c"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
                                             <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SVs-8x-Q8z">
                                                 <rect key="frame" x="36" y="390" width="342" height="2"/>
@@ -862,7 +862,7 @@ Sign in to start tracking your stuff!</string>
                                                     <constraint firstAttribute="height" constant="30" id="OYo-Y6-Oo4"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
                                             <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m3A-uN-Ifu">
                                                 <rect key="frame" x="36" y="444" width="342" height="2"/>
@@ -1051,7 +1051,7 @@ Sign in to start tracking your stuff!</string>
                                             </button>
                                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="abL-Qq-SBK">
                                                 <rect key="frame" x="8" y="241" width="398" height="56"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="nNB-QN-3YK" id="B40-mz-WzB"/>
                                                 </connections>
