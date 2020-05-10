@@ -36,6 +36,7 @@ class FirebaseClient {
                         // Add the Location names for convenience here to reduce future parsing
                         let storagesWithLocationNames: [Storage]? = storages.map({ (storage) -> Storage in
                             var newStorage = storage
+                            newStorage.locationId = location.id
                             newStorage.locationName = location.getDisplayName()
                             return newStorage
                         })
@@ -48,12 +49,14 @@ class FirebaseClient {
                         } else {
                             for (storageIndex, storage) in storages.enumerated() {
                                 // Get items for each storage
-                                getItemsList(uid: uid, locationId: storage.locationId, storageId: storage.id, dbRef: dbRef) { (items, error) in
+                                getItemsList(uid: uid, locationId: location.id, storageId: storage.id, dbRef: dbRef) { (items, error) in
                                     
                                     // Add the Location names and Storage names for convenience here to reduce future parsing
                                     let itemsWithLocationAndStorageNames: [Item]? = items?.map({ (item) -> Item in
                                         var newItem = item
+                                        newItem.locationId = location.id
                                         newItem.locationName = location.getDisplayName()
+                                        newItem.storageId = storage.id
                                         newItem.storageName = storage.name
                                         return newItem
                                     })

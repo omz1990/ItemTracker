@@ -96,11 +96,10 @@ class AddNewViewController: UIViewController {
         FirebaseClient.createLocation(location: getLocationObject()) { (success) in
             DispatchQueue.main.async {
                 self.activityIndicator?.stopAnimating()
-                
                 if success {
-                    print("Creation successful")
+                    self.navigationController?.popViewController(animated: true)
                 } else {
-                    print("Creation failed")
+                    self.showAlert(title: "Error", message: "Couuld not create Location. Please try again.")
                 }
             }
         }
@@ -114,11 +113,10 @@ class AddNewViewController: UIViewController {
         FirebaseClient.createStorage(storage: getStorageObject()) { (success) in
             DispatchQueue.main.async {
                 self.activityIndicator?.stopAnimating()
-                
                 if success {
-                    print("Creation successful")
+                    self.navigationController?.popViewController(animated: true)
                 } else {
-                    print("Creation failed")
+                    self.showAlert(title: "Error", message: "Couuld not create Storage. Please try again.")
                 }
             }
         }
@@ -132,11 +130,10 @@ class AddNewViewController: UIViewController {
         FirebaseClient.createItem(item: getItemObject() ) { (success) in
             DispatchQueue.main.async {
                 self.activityIndicator?.stopAnimating()
-                
                 if success {
-                    print("Creation successful")
+                    self.navigationController?.popViewController(animated: true)
                 } else {
-                    print("Creation failed")
+                    self.showAlert(title: "Error", message: "Couuld not create Item. Please try again.")
                 }
             }
         }

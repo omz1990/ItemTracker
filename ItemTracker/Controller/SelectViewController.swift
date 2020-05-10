@@ -18,8 +18,8 @@ class SelectViewController: UIViewController {
     var operationPath: OperationPath!
     var selectionType: SelectionType!
     
-    var allLocations: [Location]!
-    var displayedLocations: [Location]!
+    var allLocations: [Location] = []
+    var displayedLocations: [Location] = []
     
     var selectedLocation: Location!
     var allStorages: [Storage] = []
@@ -38,7 +38,7 @@ class SelectViewController: UIViewController {
         
         let nibName = UINib(nibName: Constants.View.OverviewTableView, bundle: nil)
         tableView.register(nibName, forCellReuseIdentifier: Constants.View.ItemRow)
-        
+
         if selectionType == SelectionType.location {
             titleLabel.text = "Select Location"
             topImageView.image = locationIcon
@@ -48,6 +48,49 @@ class SelectViewController: UIViewController {
         } else if selectionType == SelectionType.item {
             titleLabel.text = "Select Item"
             topImageView.image = itemIcon
+        }
+        
+        initDataChangeObserver()
+    }
+    
+    private func initDataChangeObserver() {
+        FirebaseClient.getLocations { (locations, error) in
+            guard let locations = locations else {
+                print("Could not find any locations")
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.updateUI(locations: locations)
+            }
+        }
+    }
+    
+    private func updateUI(locations: [Location]) {
+
+        if selectionType == SelectionType.location {
+            allLocations = locations
+            displayedLocations = locations
+            tableView?.reloadData()
+        } else if selectionType == SelectionType.storage {
+            let storages = locations.filter({ (location) -> Bool in
+                    return location.id == selectedLocation.id
+                }).first?.storages
+            guard let newStorages = storages else { return }
+            allStorages = newStorages
+            displayedStorages = newStorages
+            tableView?.reloadData()
+        } else if selectionType == SelectionType.item {
+            let storages = locations.filter({ (location) -> Bool in
+                return location.id == selectedStorage.locationId
+            }).first?.storages
+            let items = storages?.filter({ (storage) -> Bool in
+                return storage.id == selectedStorage.id
+            }).first?.items
+            guard let newItems = items else { return }
+            allItems = newItems
+            displayedItems = newItems
+            tableView?.reloadData()
         }
     }
     
@@ -94,10 +137,7 @@ extension SelectViewController: UITableViewDataSource, UITableViewDelegate {
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.SelectViewController) as! SelectViewController
                 vc.selectionType = .storage
                 vc.operationPath = operationPath
-                let storages = displayedLocations[indexPath.row].storages
-                vc.allStorages = storages ?? []
                 vc.selectedLocation = displayedLocations[indexPath.row]
-                vc.displayedStorages = storages ?? []
                 self.navigationController!.pushViewController(vc, animated: true)
             }
         } else if selectionType == SelectionType.storage {
@@ -113,9 +153,6 @@ extension SelectViewController: UITableViewDataSource, UITableViewDelegate {
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.SelectViewController) as! SelectViewController
                 vc.selectionType = .item
                 vc.operationPath = operationPath
-                let items = displayedStorages[indexPath.row].items
-                vc.allItems = items ?? []
-                vc.displayedItems = items ?? []
                 vc.selectedStorage = displayedStorages[indexPath.row]
                 self.navigationController!.pushViewController(vc, animated: true)
             }

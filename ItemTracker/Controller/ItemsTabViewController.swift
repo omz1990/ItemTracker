@@ -64,8 +64,6 @@ class ItemsTabViewController: UIViewController {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.SelectViewController) as! SelectViewController
         vc.selectionType = .location
         vc.operationPath = .add
-        vc.allLocations = allLocations
-        vc.displayedLocations = allLocations
         self.navigationController!.pushViewController(vc, animated: true)
     }
 }

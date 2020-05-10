@@ -55,19 +55,12 @@ class DetailsViewController: UIViewController {
         viewAllISubItemsButton?.setTitle(getButtonText(), for: .normal)
     }
     
-    private func populateLabels(for: SelectionType) {
-        
-    }
-    
     @IBAction func viewAllSubItemsTapped(_ sender: Any) {
         if selectionType == SelectionType.location {
             // Open storages
             let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.SelectViewController) as! SelectViewController
             vc.selectionType = .storage
             vc.operationPath = operationPath
-            let storages = location?.storages
-            vc.allStorages = storages ?? []
-            vc.displayedStorages = storages ?? []
             vc.selectedLocation = location
             self.navigationController!.pushViewController(vc, animated: true)
             
@@ -76,9 +69,6 @@ class DetailsViewController: UIViewController {
             let vc = self.storyboard!.instantiateViewController(withIdentifier: Constants.StoryboardId.SelectViewController) as! SelectViewController
             vc.selectionType = .item
             vc.operationPath = operationPath
-            let items = storage?.items
-            vc.allItems = items ?? []
-            vc.displayedItems = items ?? []
             vc.selectedStorage = storage
             self.navigationController!.pushViewController(vc, animated: true)
         }
@@ -134,7 +124,7 @@ class DetailsViewController: UIViewController {
             case .location:
                 return "View all Storages"
             case .storage:
-                return "Vire sll Items"
+                return "View all Items"
             default:
                 return "-"
         }
