@@ -946,6 +946,7 @@ Sign in to start tracking your stuff!</string>
                     </view>
                     <navigationItem key="navigationItem" title="Sign up" id="BhV-4P-nQ2"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="RWF-Si-jgB" id="dW9-TW-F8T"/>
                         <outlet property="confirmPasswordBottomBorder" destination="m3A-uN-Ifu" id="2TG-w8-gQi"/>
                         <outlet property="confirmPasswordTextField" destination="01H-dQ-c17" id="3az-fR-MgX"/>
                         <outlet property="createAccountButton" destination="e2g-7u-3Xk" id="BFp-mT-mkp"/>

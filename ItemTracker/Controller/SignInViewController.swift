@@ -25,11 +25,12 @@ class SignInViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        setLoadingState(isLoading: true)
         if Auth.auth().currentUser != nil {
             self.presentViewController(storyboardId: Constants.StoryboardId.MainTabsController)
         } else {
             initGoogleSignInListener()
+            setLoadingState(isLoading: false)
         }
         
         // Subscribe to keyboard events
@@ -39,7 +40,7 @@ class SignInViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+            
         // Unsubscribe keyboard events
         unsubscribeFromKeyboardWillShowNotifications()
         unsubscribeFromKeyboardWillHideNotifications()
@@ -59,6 +60,7 @@ class SignInViewController: UIViewController {
 
     @objc func googleSignInTapped(sender : UITapGestureRecognizer) {
         print("Google Sign in tapped")
+        setLoadingState(isLoading: true)
         GIDSignIn.sharedInstance().signIn()
         googleSignInView.removeGestureRecognizer(googleSignInGestureRecognizer)
     }
@@ -74,7 +76,7 @@ class SignInViewController: UIViewController {
     private func signInUser() {
         let email = emailTextField.text ?? ""
         let password = passwordTextField.text ?? ""
-        
+        setLoadingState(isLoading: true)
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
             guard let strongSelf = self else {
                 return
@@ -83,6 +85,7 @@ class SignInViewController: UIViewController {
                 if error == nil {
                     strongSelf.presentViewController(storyboardId: Constants.StoryboardId.MainTabsController)
                 } else {
+                    strongSelf.setLoadingState(isLoading: true)
                     strongSelf.showAlert(title: "Error", message: error?.localizedDescription ?? "Could not login. Please try again!")
                 }
             }
@@ -112,17 +115,35 @@ class SignInViewController: UIViewController {
         
         return valid
     }
+    
+    private func setLoadingState(isLoading: Bool) {
+        if isLoading {
+            activityIndicator?.startAnimating()
+            if let gr = googleSignInGestureRecognizer {
+                googleSignInView?.removeGestureRecognizer(gr)
+            }
+        } else {
+            activityIndicator?.stopAnimating()
+            if let gr = googleSignInGestureRecognizer {
+                googleSignInView?.addGestureRecognizer(gr)
+            }
+        }
+        emailTextField.isEnabled = !isLoading
+        passwordTextField.isEnabled = !isLoading
+        signInButton.isEnabled = !isLoading
+        signUpButton.isEnabled = !isLoading
+    }
 }
 
 extension SignInViewController: GIDSignInDelegate {
 
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
         if let error = error {
-            print(error)
+            self.showAlert(title: "Error", message: "Could not login. Please try again!")
             return
         }
-
-        guard let email = user.profile.email else { return }
+        setLoadingState(isLoading: true)
+        guard user.profile.email != nil else { return }
 
         guard let authentication = user.authentication else { return }
 

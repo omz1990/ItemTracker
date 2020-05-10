@@ -20,6 +20,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var confirmPasswordBottomBorder: UIView!
     @IBOutlet weak var createAccountButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -92,10 +93,12 @@ class SignUpViewController: UIViewController {
     private func signUpUser() {
         let email = emailTextField.text ?? ""
         let password = passwordTextField.text ?? ""
+        setLoadingState(isLoading: true)
         
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             DispatchQueue.main.async {
                 guard let user = authResult?.user, error == nil else {
+                    self.setLoadingState(isLoading: false)
                     self.showAlert(title: "Error", message: error?.localizedDescription ?? "Could not sign up. Please try again!")
                   return
                 }
@@ -110,6 +113,7 @@ class SignUpViewController: UIViewController {
         changeRequest?.displayName = name
         changeRequest?.commitChanges { (error) in
             DispatchQueue.main.async {
+                self.setLoadingState(isLoading: false)
                 if error == nil {
                     self.presentViewController(storyboardId: Constants.StoryboardId.MainTabsController)
                 } else {
@@ -117,5 +121,15 @@ class SignUpViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func setLoadingState(isLoading: Bool) {
+        if isLoading {
+            activityIndicator?.startAnimating()
+        } else {
+            activityIndicator?.stopAnimating()
+        }
+        emailTextField.isEnabled = !isLoading
+        passwordTextField.isEnabled = !isLoading
     }
 }
