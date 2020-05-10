@@ -15,6 +15,7 @@ class LocationsTabViewController: UIViewController {
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var errorLabel: UILabel!
     
     var allLocations: [Location] = []
     var displayedLocations: [Location] = []
@@ -29,18 +30,23 @@ class LocationsTabViewController: UIViewController {
         activityIndicator.startAnimating()
         
         FirebaseClient.getLocations { (locations, error) in
-            guard let locations = locations else {
-                print("Could not find any locations")
-                return
-            }
-            
             DispatchQueue.main.async {
-                self.allLocations = locations
-                self.displayedLocations = locations
-                self.collectionView?.reloadData()
-                self.activityIndicator?.stopAnimating()
+                self.handleLocationsResponse(locations: locations)
             }
         }
+    }
+        
+    private func handleLocationsResponse(locations: [Location]?) {
+        activityIndicator?.stopAnimating()
+        guard let locations = locations else {
+            errorLabel?.text = "No Locations found. You can add new locations by tapping on the + icon on the top left of this screen!"
+            return
+        }
+        
+        errorLabel?.text = ""
+        allLocations = locations
+        displayedLocations = locations
+        collectionView?.reloadData()
     }
     
     @IBAction func logoutTapped(_ sender: Any) {

@@ -393,13 +393,23 @@ Sign in to start tracking your stuff!</string>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="IqG-Lc-VqI">
                                 <rect key="frame" x="197" y="440.5" width="20" height="20"/>
                             </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5E-sE-RlC">
+                                <rect key="frame" x="20" y="450.5" width="374" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="IqG-Lc-VqI" firstAttribute="centerX" secondItem="1Tx-SU-JiD" secondAttribute="centerX" id="0Mx-Jd-Izb"/>
+                            <constraint firstItem="n5E-sE-RlC" firstAttribute="leading" secondItem="UGs-LI-xeL" secondAttribute="leading" constant="20" id="2Xw-1c-1NJ"/>
+                            <constraint firstItem="n5E-sE-RlC" firstAttribute="centerY" secondItem="IqG-Lc-VqI" secondAttribute="centerY" id="4NB-J1-nyG"/>
                             <constraint firstItem="1Tx-SU-JiD" firstAttribute="trailing" secondItem="kBV-40-Wec" secondAttribute="trailing" constant="8" id="7Jb-9w-4Kp"/>
                             <constraint firstItem="1Tx-SU-JiD" firstAttribute="bottom" secondItem="XLi-aa-Z36" secondAttribute="bottom" id="8fU-Fe-7GO"/>
+                            <constraint firstAttribute="trailing" secondItem="n5E-sE-RlC" secondAttribute="trailing" constant="20" id="E9Q-sv-Kzf"/>
                             <constraint firstItem="XLi-aa-Z36" firstAttribute="leading" secondItem="1Tx-SU-JiD" secondAttribute="leading" id="TG4-lU-sBw"/>
+                            <constraint firstItem="n5E-sE-RlC" firstAttribute="centerX" secondItem="1Tx-SU-JiD" secondAttribute="centerX" id="TjH-Cl-0Xe"/>
                             <constraint firstItem="1Tx-SU-JiD" firstAttribute="trailing" secondItem="XLi-aa-Z36" secondAttribute="trailing" id="Vmt-dM-lNp"/>
                             <constraint firstItem="ZMw-MC-QNJ" firstAttribute="leading" secondItem="1Tx-SU-JiD" secondAttribute="leading" constant="16" id="hOv-T4-v5F"/>
                             <constraint firstItem="ZMw-MC-QNJ" firstAttribute="top" secondItem="1Tx-SU-JiD" secondAttribute="top" constant="12" id="j9o-NJ-WjM"/>
@@ -426,6 +436,7 @@ Sign in to start tracking your stuff!</string>
                     <connections>
                         <outlet property="activityIndicator" destination="IqG-Lc-VqI" id="4MK-aO-h3f"/>
                         <outlet property="collectionView" destination="XLi-aa-Z36" id="Jzv-c4-h3Q"/>
+                        <outlet property="errorLabel" destination="n5E-sE-RlC" id="L1t-nu-bwY"/>
                         <outlet property="flowLayout" destination="lX7-Ih-iiV" id="rKA-yE-sSz"/>
                         <outlet property="searchBar" destination="kBV-40-Wec" id="NGF-dx-PLM"/>
                     </connections>
@@ -695,19 +706,30 @@ Sign in to start tracking your stuff!</string>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="8iW-fo-ild">
                                 <rect key="frame" x="197" y="440.5" width="20" height="20"/>
                             </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNu-Es-5FK">
+                                <rect key="frame" x="20" y="450.5" width="374" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="nNu-Es-5FK" firstAttribute="centerX" secondItem="5f2-e9-3xH" secondAttribute="centerX" id="1Yc-av-lju"/>
                             <constraint firstItem="8iW-fo-ild" firstAttribute="centerY" secondItem="5f2-e9-3xH" secondAttribute="centerY" id="9xY-O1-rh9"/>
+                            <constraint firstItem="nNu-Es-5FK" firstAttribute="centerY" secondItem="8iW-fo-ild" secondAttribute="centerY" id="CTc-Ld-Xw5"/>
                             <constraint firstItem="GW0-z6-amC" firstAttribute="leading" secondItem="5f2-e9-3xH" secondAttribute="leading" id="Cl5-hJ-Fet"/>
+                            <constraint firstItem="nNu-Es-5FK" firstAttribute="leading" secondItem="zbc-Gl-G8p" secondAttribute="leading" constant="20" id="HgA-jl-SZZ"/>
                             <constraint firstItem="Qpn-iO-Ois" firstAttribute="leading" secondItem="5f2-e9-3xH" secondAttribute="leading" constant="8" id="HzR-o4-BIB"/>
                             <constraint firstItem="8iW-fo-ild" firstAttribute="centerX" secondItem="5f2-e9-3xH" secondAttribute="centerX" id="Icj-j5-P2a"/>
                             <constraint firstItem="5f2-e9-3xH" firstAttribute="bottom" secondItem="GW0-z6-amC" secondAttribute="bottom" id="Y1h-bg-8Ko"/>
+                            <constraint firstItem="nNu-Es-5FK" firstAttribute="centerX" secondItem="zbc-Gl-G8p" secondAttribute="centerX" id="cJ3-bu-qvL"/>
                             <constraint firstItem="MnZ-ya-V3f" firstAttribute="top" secondItem="5f2-e9-3xH" secondAttribute="top" constant="12" id="e1l-fG-CZd"/>
                             <constraint firstItem="5f2-e9-3xH" firstAttribute="trailing" secondItem="Qpn-iO-Ois" secondAttribute="trailing" constant="8" id="fhp-5W-2dJ"/>
                             <constraint firstItem="Qpn-iO-Ois" firstAttribute="top" secondItem="MnZ-ya-V3f" secondAttribute="bottom" constant="4" id="pZb-lg-g4o"/>
                             <constraint firstItem="GW0-z6-amC" firstAttribute="top" secondItem="Qpn-iO-Ois" secondAttribute="bottom" id="rFF-ZO-rLL"/>
                             <constraint firstItem="5f2-e9-3xH" firstAttribute="trailing" secondItem="GW0-z6-amC" secondAttribute="trailing" id="ucI-FV-CC9"/>
+                            <constraint firstAttribute="trailing" secondItem="nNu-Es-5FK" secondAttribute="trailing" constant="20" id="wPq-Nz-juB"/>
                             <constraint firstItem="MnZ-ya-V3f" firstAttribute="leading" secondItem="5f2-e9-3xH" secondAttribute="leading" constant="16" id="wah-1l-1lR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5f2-e9-3xH"/>
@@ -727,6 +749,7 @@ Sign in to start tracking your stuff!</string>
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="8iW-fo-ild" id="ky1-Qb-B5o"/>
+                        <outlet property="errorLabel" destination="nNu-Es-5FK" id="oZ8-ux-x6z"/>
                         <outlet property="searchBar" destination="Qpn-iO-Ois" id="n4r-cT-Gpf"/>
                         <outlet property="tableView" destination="GW0-z6-amC" id="r6s-fb-Ins"/>
                     </connections>
@@ -1051,6 +1074,12 @@ Sign in to start tracking your stuff!</string>
                                                     <outlet property="delegate" destination="nNB-QN-3YK" id="jv5-79-hw3"/>
                                                 </connections>
                                             </tableView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJg-vi-RW5">
+                                                <rect key="frame" x="207" y="409" width="0.0" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -1063,8 +1092,10 @@ Sign in to start tracking your stuff!</string>
                                             <constraint firstItem="ts0-LU-mSM" firstAttribute="centerX" secondItem="crV-su-xoh" secondAttribute="centerX" id="VPb-n6-sMF"/>
                                             <constraint firstItem="Yto-dC-MeX" firstAttribute="top" secondItem="abL-Qq-SBK" secondAttribute="bottom" id="afe-ta-Rpd"/>
                                             <constraint firstItem="abL-Qq-SBK" firstAttribute="leading" secondItem="crV-su-xoh" secondAttribute="leading" constant="8" id="bW6-bJ-Did"/>
+                                            <constraint firstItem="wJg-vi-RW5" firstAttribute="centerX" secondItem="crV-su-xoh" secondAttribute="centerX" id="c5o-0L-r6a"/>
                                             <constraint firstAttribute="bottom" secondItem="Yto-dC-MeX" secondAttribute="bottom" id="kkw-UW-jHg"/>
                                             <constraint firstItem="Aey-qM-inG" firstAttribute="centerX" secondItem="crV-su-xoh" secondAttribute="centerX" id="nSS-uX-3ml"/>
+                                            <constraint firstItem="wJg-vi-RW5" firstAttribute="centerY" secondItem="crV-su-xoh" secondAttribute="centerY" id="p8r-y4-9dn"/>
                                             <constraint firstAttribute="trailing" secondItem="Yto-dC-MeX" secondAttribute="trailing" id="rl0-aP-z6w"/>
                                             <constraint firstItem="ts0-LU-mSM" firstAttribute="top" secondItem="Aey-qM-inG" secondAttribute="bottom" constant="20" id="sdD-H0-pWz"/>
                                             <constraint firstItem="kbK-z8-gsE" firstAttribute="top" secondItem="ts0-LU-mSM" secondAttribute="bottom" constant="12" id="z2h-Ki-BGN"/>
@@ -1091,6 +1122,7 @@ Sign in to start tracking your stuff!</string>
                         <viewLayoutGuide key="safeArea" id="7EP-rg-O3S"/>
                     </view>
                     <connections>
+                        <outlet property="errorLabel" destination="wJg-vi-RW5" id="d9E-ke-RE1"/>
                         <outlet property="searchBar" destination="abL-Qq-SBK" id="Kcx-kF-GB8"/>
                         <outlet property="tableView" destination="Yto-dC-MeX" id="hXF-OE-Pc1"/>
                         <outlet property="titleLabel" destination="ts0-LU-mSM" id="vkj-kR-Kb8"/>
@@ -1113,7 +1145,7 @@ Sign in to start tracking your stuff!</string>
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51u-2T-9qm">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="714.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="514"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYq-3l-Fdm">
                                                 <rect key="frame" x="16" y="112" width="382" height="41"/>
@@ -1122,7 +1154,7 @@ Sign in to start tracking your stuff!</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WLa-nw-drL">
-                                                <rect key="frame" x="16" y="173" width="382" height="541.5"/>
+                                                <rect key="frame" x="16" y="173" width="382" height="341"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ay-3C-iSo">
                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="66"/>
@@ -1202,35 +1234,8 @@ Sign in to start tracking your stuff!</string>
                                                             <constraint firstItem="K9v-pe-who" firstAttribute="top" secondItem="GYw-4k-Qop" secondAttribute="bottom" constant="6" id="q7K-xB-VZE"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wac-rU-V0J">
-                                                        <rect key="frame" x="0.0" y="201" width="382" height="200.5"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="530-DO-E5M">
-                                                                <rect key="frame" x="0.0" y="10" width="382" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AHQ-pe-WeY">
-                                                                <rect key="frame" x="116" y="40.5" width="150" height="150"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="150" id="EXj-Ek-udz"/>
-                                                                    <constraint firstAttribute="height" constant="150" id="ITP-pS-mNH"/>
-                                                                </constraints>
-                                                            </imageView>
-                                                        </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="trailing" secondItem="530-DO-E5M" secondAttribute="trailing" id="0Hi-av-INF"/>
-                                                            <constraint firstItem="AHQ-pe-WeY" firstAttribute="top" secondItem="530-DO-E5M" secondAttribute="bottom" constant="10" id="9fi-Gc-J50"/>
-                                                            <constraint firstItem="AHQ-pe-WeY" firstAttribute="centerX" secondItem="Wac-rU-V0J" secondAttribute="centerX" id="C0m-AZ-q88"/>
-                                                            <constraint firstItem="530-DO-E5M" firstAttribute="leading" secondItem="Wac-rU-V0J" secondAttribute="leading" id="MyN-E3-F5k"/>
-                                                            <constraint firstAttribute="bottom" secondItem="AHQ-pe-WeY" secondAttribute="bottom" constant="10" id="ciQ-6g-vSe"/>
-                                                            <constraint firstItem="530-DO-E5M" firstAttribute="top" secondItem="Wac-rU-V0J" secondAttribute="top" constant="10" id="ipy-md-NzV"/>
-                                                        </constraints>
-                                                    </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Acl-oz-TcH">
-                                                        <rect key="frame" x="0.0" y="401.5" width="382" height="140"/>
+                                                        <rect key="frame" x="0.0" y="201" width="382" height="140"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storages: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mxi-hX-8fI">
                                                                 <rect key="frame" x="0.0" y="10" width="382" height="24"/>
@@ -1315,8 +1320,6 @@ Sign in to start tracking your stuff!</string>
                     </view>
                     <connections>
                         <outlet property="descriptionLabel" destination="K9v-pe-who" id="60O-Co-flT"/>
-                        <outlet property="detailImageView" destination="AHQ-pe-WeY" id="vOv-K5-DAD"/>
-                        <outlet property="imageViewContainer" destination="Wac-rU-V0J" id="1zC-ee-rHC"/>
                         <outlet property="nameLabel" destination="7Ts-Oa-rYc" id="11x-Jj-orv"/>
                         <outlet property="scrollview" destination="ZVO-gU-QZ8" id="lmE-aF-t2I"/>
                         <outlet property="subListContainer" destination="Acl-oz-TcH" id="dTu-68-i4U"/>

@@ -17,8 +17,6 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var subNameView: UIView!
     @IBOutlet weak var subNameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var imageViewContainer: UIView!
-    @IBOutlet weak var detailImageView: UIImageView!
     @IBOutlet weak var subListContainer: UIView!
     @IBOutlet weak var subListTitle: UILabel!
 
@@ -40,7 +38,6 @@ class DetailsViewController: UIViewController {
     }
     
     private func initDisplay() {
-        imageViewContainer.isHidden = true
         
         thumbnailImageView?.image = getThumbnail(selectionType: selectionType)
         titleLabel?.text = getScreenTitle()

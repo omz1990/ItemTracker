@@ -14,6 +14,7 @@ class SelectViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var errorLabel: UILabel!
     
     var operationPath: OperationPath!
     var selectionType: SelectionType!

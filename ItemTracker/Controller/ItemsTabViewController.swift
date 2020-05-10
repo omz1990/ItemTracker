@@ -13,6 +13,7 @@ class ItemsTabViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var errorLabel: UILabel!
     
     var allLocations: [Location] = []
     var allItems: [Item] = []
@@ -25,24 +26,30 @@ class ItemsTabViewController: UIViewController {
         tableView.register(nibName, forCellReuseIdentifier: Constants.View.ItemRow)
 
         FirebaseClient.getLocations { (locations, error) in
-            guard let locations = locations else {
-                print("Could not find any locations")
-                return
-            }
-            
             DispatchQueue.main.async {
-                self.allLocations = locations
-                
-                guard let allItemsFromLocations = self.getAllItemsFromLocations(locations: locations) else {
-                    print("Could not find any items")
-                    return
-                }
-                self.allItems = allItemsFromLocations
-                self.displayedItems = allItemsFromLocations
-                self.tableView?.reloadData()
-                self.activityIndicator?.stopAnimating()
+                self.handleLocationsResponse(locations: locations)
             }
         }
+    }
+    
+    private func handleLocationsResponse(locations: [Location]?) {
+        let errorText = "No Items found. You can add new items by tapping on the + icon on the top left of this screen!"
+        activityIndicator?.stopAnimating()
+        guard let locations = locations else {
+            errorLabel?.text = errorText
+            return
+        }
+        
+        allLocations = locations
+        
+        guard let allItemsFromLocations = self.getAllItemsFromLocations(locations: locations) else {
+            errorLabel?.text = errorText
+            return
+        }
+        errorLabel?.text = ""
+        allItems = allItemsFromLocations
+        displayedItems = allItemsFromLocations
+        tableView?.reloadData()
     }
     
     private func getAllItemsFromLocations(locations: [Location]) -> [Item]? {
