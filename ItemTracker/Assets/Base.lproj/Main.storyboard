@@ -237,8 +237,10 @@ Sign in to start tracking your stuff!</string>
                     <navigationItem key="navigationItem" title="Sign in" id="6Oh-yY-xA6"/>
                     <connections>
                         <outlet property="activityIndicator" destination="kHQ-U7-132" id="HaG-Wa-BAd"/>
+                        <outlet property="emailBottomBorder" destination="7ah-VO-Gio" id="MNs-Vn-wrZ"/>
                         <outlet property="emailTextField" destination="R54-tR-zol" id="T1u-5t-DXP"/>
                         <outlet property="googleSignInView" destination="pC7-0y-6KT" id="SKX-gC-l37"/>
+                        <outlet property="passwordBottomBorder" destination="i3x-BZ-M9Y" id="6Ry-T4-B2R"/>
                         <outlet property="passwordTextField" destination="2Sb-M0-8Db" id="0lw-Gq-8hP"/>
                         <outlet property="signInButton" destination="PRE-fb-ZrD" id="9V7-cF-Xqw"/>
                         <outlet property="signUpButton" destination="NCD-sB-4fA" id="zhv-ia-tlp"/>
@@ -964,6 +966,9 @@ Sign in to start tracking your stuff!</string>
                                                         <real key="value" value="14"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="createAccountTapped:" destination="Hdf-hE-Eaw" eventType="touchUpInside" id="FuD-i0-k4O"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1043,6 +1048,17 @@ Sign in to start tracking your stuff!</string>
                         <viewLayoutGuide key="safeArea" id="XZw-sr-VLP"/>
                     </view>
                     <navigationItem key="navigationItem" title="Sign up" id="BhV-4P-nQ2"/>
+                    <connections>
+                        <outlet property="confirmPasswordBottomBorder" destination="m3A-uN-Ifu" id="2TG-w8-gQi"/>
+                        <outlet property="confirmPasswordTextField" destination="01H-dQ-c17" id="3az-fR-MgX"/>
+                        <outlet property="createAccountButton" destination="e2g-7u-3Xk" id="BFp-mT-mkp"/>
+                        <outlet property="emailBottomBorder" destination="bhd-ZZ-Gt3" id="c5M-4V-aeG"/>
+                        <outlet property="emailTextField" destination="M1s-qK-anf" id="A28-lH-HPj"/>
+                        <outlet property="nameBottomBorder" destination="mHB-pq-OSe" id="On0-Gp-ysJ"/>
+                        <outlet property="nameTextField" destination="1P5-pW-G6K" id="1f4-p5-eP2"/>
+                        <outlet property="passwordBottomBorder" destination="SVs-8x-Q8z" id="T4s-Qn-xoJ"/>
+                        <outlet property="passwordTextField" destination="Fsg-qZ-MTI" id="N4S-db-9a2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yl0-MT-VgC" sceneMemberID="firstResponder"/>
             </objects>

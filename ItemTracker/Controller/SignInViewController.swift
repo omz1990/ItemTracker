@@ -14,7 +14,9 @@ class SignInViewController: UIViewController {
 
     @IBOutlet weak var googleSignInView: RoundedView!
     @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var emailBottomBorder: UIView!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var passwordBottomBorder: UIView!
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -62,7 +64,53 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func signInTapped(_ sender: Any) {
-        presentViewController(storyboardId: Constants.StoryboardId.MainTabsController)
+        if validateTextFields() {
+            signInUser()
+        } else {
+            showAlert(title: Constants.ErrorMessage.incompleteFieldsTile, message: Constants.ErrorMessage.incompleteFieldsBody)
+        }
+    }
+    
+    private func signInUser() {
+        let email = emailTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+        
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+            guard let strongSelf = self else {
+                return
+            }
+            DispatchQueue.main.async {
+                if error == nil {
+                    strongSelf.presentViewController(storyboardId: Constants.StoryboardId.MainTabsController)
+                } else {
+                    strongSelf.showAlert(title: "Error", message: error?.localizedDescription ?? "Could not login. Please try again!")
+                }
+            }
+        }
+    }
+    
+    private func validateTextFields() -> Bool {
+        let errorColor: UIColor = .red
+        let validColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+        var valid = true
+        
+        // Email field is required
+        if emailTextField.text?.isEmpty == true {
+            emailBottomBorder.backgroundColor = errorColor
+            valid = false
+        } else {
+            emailBottomBorder.backgroundColor = validColor
+        }
+        
+        // Password field is required
+        if passwordTextField.text?.isEmpty == true {
+            passwordBottomBorder.backgroundColor = errorColor
+            valid = false
+        } else {
+            passwordBottomBorder.backgroundColor = validColor
+        }
+        
+        return valid
     }
 }
 
