@@ -89,11 +89,11 @@ class DetailsViewController: UIViewController {
         let noDescriptionString = "No description provided..."
         switch selectionType {
             case .location:
-                return location?.description ?? noDescriptionString
+                return location?.description?.isEmpty == true ? noDescriptionString : location?.description ?? noDescriptionString
             case .storage:
-                return storage?.description ?? noDescriptionString
+                return storage?.description?.isEmpty == true ? noDescriptionString : storage?.description ?? noDescriptionString
             case .item:
-                return item?.description ?? noDescriptionString
+                return item?.description?.isEmpty == true ? noDescriptionString : item?.description ?? noDescriptionString
             default:
                 return noDescriptionString
         }
